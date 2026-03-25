@@ -20,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
 import { z } from "zod"
+import { loginUser } from "@/services/auth.service"
 
 export function LoginForm({
   className,
@@ -40,7 +41,7 @@ export function LoginForm({
     setError(null)
 
     const result = loginSchema.safeParse({ email, password })
-
+    console.log(result);
     if (!result.success) {
       result.error.issues.forEach((issue) => {
         toast.error(issue.message)
@@ -51,18 +52,9 @@ export function LoginForm({
     setLoading(true)
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(result.data),
-        }
-      )
-
+      const res = await loginUser(result.data)
       const data = await res.json()
+      console.log(data);
 
       if (!data.success) {
         setError(data.message)
@@ -70,8 +62,6 @@ export function LoginForm({
         return
       }
 
-      // ✅ store token (client side)
-      localStorage.setItem("token", data.token)
 
       toast.success("Login successful")
 

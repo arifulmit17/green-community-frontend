@@ -8,7 +8,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 // 🔐 LOGIN
 export const loginUser = async (userData: any) => {
   try {
-    const res = await fetch(`${BASE_URL}/auth/login`, {
+    const res = await fetch(`${BASE_URL}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export const loginUser = async (userData: any) => {
     });
 
     const result = await res.json();
-
+    console.log(result);
     if (result.success) {
       const cookieStore =await cookies();
 
@@ -39,11 +39,10 @@ export const loginUser = async (userData: any) => {
 export const getUser = async () => {
   const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;
-  console.log("token:",token);
   if (!token) return null;
 
   try {
-    const res = await fetch(`${BASE_URL}/auth/me`, {
+    const res = await fetch(`${BASE_URL}/api/auth/me`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
