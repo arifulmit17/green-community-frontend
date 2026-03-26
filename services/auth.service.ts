@@ -5,6 +5,60 @@ import { cookies } from "next/headers";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
+console.log(BASE_URL);
+// 🔐 SIGNUP SERVICE
+export const signupUser = async (userData: {
+  name: string;
+  email: string;
+  password: string;
+}) => {
+  try {
+    
+    const res = await fetch(`${BASE_URL}/api/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+
+    const data = await res.json();
+    console.log(data);
+    // ❌ Handle API error
+    if (!res.ok) {
+      return {
+        success: false,
+        message: data?.message || "Signup failed",
+      };
+    }
+
+    // ✅ Store token (if backend returns it)
+    if (data.token) {
+      const cookieStore =await cookies();
+
+      // ✅ FIX: token is directly in result.token
+      cookieStore.set("token", data.token, {
+        httpOnly: true,
+        secure: false, // true in production
+        path: "/",
+      });
+    }
+    
+    return {
+      success: true,
+      data: data.data,
+      message: data.message || "Signup successful",
+    };
+  } catch (error) {
+    console.error("Signup error:", error);
+
+    return {
+      success: false,
+      message: "Something went wrong",
+    };
+  }
+};
+
 // 🔐 LOGIN
 export const loginUser = async (userData: any) => {
   try {
