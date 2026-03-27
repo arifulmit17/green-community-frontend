@@ -1,13 +1,14 @@
+import { Hero } from "@/components/homepage/Hero";
 import { Button } from "@/components/ui/button";
 
 
 export default function Home() {
   return (
     <div>
-      <section className="">
-          {/* <Hero></Hero> */}
+      <section className="h-1000px w-full ">
+          <Hero></Hero>
       </section>
-      <section className="w-full flex flex-col justify-center items-center gap-10 mt-0 lg:mt-40">
+      <section className="w-full flex flex-col justify-center items-center gap-10 mt-0 lg:mt-10">
             <div className="w-full text-5xl text-center"> 
                <h1 >Featured Tutors</h1>
             </div>
