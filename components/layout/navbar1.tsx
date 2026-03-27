@@ -1,6 +1,6 @@
 "use client";
 
-import {  Menu } from "lucide-react";
+import {  Menu, User } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -44,6 +44,10 @@ interface Navbar1Props {
   };
   menu?: MenuItem[];
   auth?: {
+    profile:{
+       title:string;
+       url:string;
+    };
     login: {
       title: string;
       url: string;
@@ -68,24 +72,30 @@ const Navbar1 = ({
     
     
     alt: "logo",
-    title: "SkillBridge",
+    title: "Green Community",
   },
   menu = [
     { title: "Home", url: "/" },
     {
-      title: "Tutors",
-      url: "/tutors",
+      title: "Ideas",
+      url: "/ideas",
       
     },
     {
-      title: "Sessions",
-      url: "/sessions",
+      title: "About Us",
+      url: "/about",
+     
+    },
+    {
+      title: "Blog",
+      url: "/blog",
      
     },
     
     
   ],
   auth = {
+    profile: { title: "My Profile", url: "/profile" },
     login: { title: "Login", url: "/login" },
     signup: { title: "Sign up", url: "/signup" },
   },
@@ -93,8 +103,8 @@ const Navbar1 = ({
 }: Navbar1Props) => {
   const [session, setSession] = useState<any>(null);
 const [loading, setLoading] = useState(true);
-
-const role = session?.user?.role;
+console.log(session);
+const role = session?.role;
 
 useEffect(() => {
   const fetchSession = async () => {
@@ -109,15 +119,13 @@ useEffect(() => {
 
 let dashboardItem: MenuItem | null = null;
 
-if (role === "tutor") {
-  dashboardItem = { title: "Dashboard", url: "/tutor-dashboard" };
-} else if (role === "student") {
+if (role === "MEMBER") {
   dashboardItem = { title: "Dashboard", url: "/dashboard" };
-} else if (role === "admin") {
+} else if (role === "ADMIN") {
   dashboardItem = { title: "Dashboard", url: "/admin-dashboard" };
 }
  const finalMenu = dashboardItem ? [...menu, dashboardItem] : menu;
-  // const session= authClient.getSession()
+  // const session= getUser()
   // console.log(session);
   return (
     <section className={cn("py-4", className)}>
@@ -141,6 +149,9 @@ if (role === "tutor") {
             </div>
           </div>
           <div className="flex gap-2">
+            <div className="flex items-center">
+  {session && <h1 className="text-sm"><Link href={auth.profile.url}>{auth.profile.title}</Link></h1>}
+</div>
            {!session ? <Button asChild variant="outline" size="sm">
               <a href={auth.login.url}>{auth.login.title}</a>
             </Button>:
