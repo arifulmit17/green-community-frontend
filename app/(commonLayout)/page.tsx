@@ -1,3 +1,4 @@
+import Categories from "@/components/homepage/Categories";
 import FaqSection from "@/components/homepage/FaqSection";
 import { Hero } from "@/components/homepage/Hero";
 import { Button } from "@/components/ui/button";
@@ -28,7 +29,7 @@ export default function Home() {
                <h1 >Popular Categories</h1>
             </div>
             
-           {/* <Categories></Categories> */}
+           <Categories></Categories>
       </section>
       <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-10">
             <div className="w-full text-5xl text-center"> 
