@@ -1,7 +1,7 @@
 import Categories from "@/components/homepage/Categories";
 import FaqSection from "@/components/homepage/FaqSection";
 import { Hero } from "@/components/homepage/Hero";
-import { Button } from "@/components/ui/button";
+import { NewsletterSection } from "@/components/homepage/Newsletter";
 
 
 export default function Home() {
@@ -10,14 +10,7 @@ export default function Home() {
       <section className="h-1000px w-full ">
           <Hero></Hero>
       </section>
-      <section className="w-full flex flex-col justify-center items-center gap-10 mt-0 lg:mt-40">
-            <div className="w-full text-5xl text-center"> 
-               <h1 >Featured Tutors</h1>
-            </div>
-            
-           {/* <FeaturedTutor></FeaturedTutor> */}
-      </section>
-      <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-10">
+      <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-40">
             <div className="w-full text-5xl text-center"> 
                <h1 >Popular Sessions</h1>
             </div>
@@ -44,6 +37,13 @@ export default function Home() {
             </div>
             
           <FaqSection></FaqSection>
+      </section>
+      <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-10">
+            <div className="w-full text-5xl text-center"> 
+               <h1 >Newsletter</h1>
+            </div>
+            
+          <NewsletterSection></NewsletterSection>
       </section>
      
     </div>
