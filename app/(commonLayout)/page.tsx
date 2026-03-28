@@ -1,3 +1,4 @@
+import FaqSection from "@/components/homepage/FaqSection";
 import { Hero } from "@/components/homepage/Hero";
 import { Button } from "@/components/ui/button";
 
@@ -8,7 +9,7 @@ export default function Home() {
       <section className="h-1000px w-full ">
           <Hero></Hero>
       </section>
-      <section className="w-full flex flex-col justify-center items-center gap-10 mt-0 lg:mt-10">
+      <section className="w-full flex flex-col justify-center items-center gap-10 mt-0 lg:mt-40">
             <div className="w-full text-5xl text-center"> 
                <h1 >Featured Tutors</h1>
             </div>
@@ -31,7 +32,7 @@ export default function Home() {
       </section>
       <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-10">
             <div className="w-full text-5xl text-center"> 
-               <h1 >Student Reviews</h1>
+               <h1 >Member Reviews</h1>
             </div>
             
            {/* <ReviewSection></ReviewSection> */}
@@ -41,7 +42,7 @@ export default function Home() {
                <h1 >F.A.Q</h1>
             </div>
             
-          {/* <FaqSection></FaqSection> */}
+          <FaqSection></FaqSection>
       </section>
      
     </div>
