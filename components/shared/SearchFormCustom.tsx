@@ -53,6 +53,7 @@ if (selectedCategory) params.append("categoryId", selectedCategory)
       )
 
       const {data} = await res.json()
+    //   console.log(data);
       onResults(data)
     } catch (error) {
       console.error("Search error:", error)

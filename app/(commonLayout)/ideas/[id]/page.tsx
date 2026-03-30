@@ -36,12 +36,13 @@ export default function IdeaDetailsPage() {
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea/${id}`,
           {
             headers: {
-              Authorization: token ? token : "",
-            },
+      Authorization: `Bearer ${token}`,
+    },
           }
         )
 
-        const data = await res.json()
+        const {data} = await res.json()
+        console.log(data);
 
         // 🔒 Paid idea protection
         if (data?.message) {
