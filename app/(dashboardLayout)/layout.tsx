@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic"
 import { AppSidebar } from "@/components/app-sidebar";
-import LogoutButton from "@/components/modules/shared/LogoutButton";
+import LogoutButton from "@/components/shared/LogoutButton";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,21 +17,20 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { userService } from "@/services/user.service";
+import { getUser } from "@/services/auth.service";
+
 import { Children } from "react";
 
 export default async function DashboardLayout({
-    student,
-  admin,
-  tutor,
+    member,
+  admin
 }: {
-  student: React.ReactNode;
+  member: React.ReactNode;
   admin: React.ReactNode;
-  tutor: React.ReactNode;
 }) {
-    const { data } = await userService.getSession();
+    const data  = await getUser();
   const userInfo = {
-    role: data?.user.role,
+    role: data?.role,
   };
   
 
@@ -64,7 +64,7 @@ export default async function DashboardLayout({
           
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {userInfo.role === "admin" ? admin : userInfo.role === "tutor" ? tutor : student}
+          {userInfo.role === "ADMIN" ? admin : member}
         </div>
       </SidebarInset>
     </SidebarProvider>

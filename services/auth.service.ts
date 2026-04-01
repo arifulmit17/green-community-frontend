@@ -1,8 +1,8 @@
 "use server";
 
-import { jwtDecode } from "jwt-decode";
-import { cookies } from "next/headers";
 
+import { cookies } from "next/headers";
+import { env } from "process"
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 console.log(BASE_URL);
@@ -71,7 +71,7 @@ export const loginUser = async (userData: any) => {
     });
 
     const result = await res.json();
-    console.log(result);
+    console.log("login result", result);
     if (result.success) {
       const cookieStore =await cookies();
 
@@ -93,13 +93,14 @@ export const loginUser = async (userData: any) => {
 export const getUser = async () => {
   const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;
+  console.log("user token",token);
   if (!token) return null;
 
   try {
     const res = await fetch(`${BASE_URL}/api/auth/me`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Cookie: `token=${token}`, 
       },
       cache: "no-store", // important
     });

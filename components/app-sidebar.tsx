@@ -24,7 +24,7 @@ import { memberRoutes } from "@/routes/memberRoutes";
 export function AppSidebar({ user,...props }: {user: { role: string } & React.ComponentProps<typeof Sidebar> } ) {
 
   let routes: Route[] = [];
-
+  console.log("user data side",user.role);
   switch (user.role) {
     case "ADMIN":
       routes = adminRoutes;
@@ -36,12 +36,14 @@ export function AppSidebar({ user,...props }: {user: { role: string } & React.Co
       routes = [];
       break;
   }
+  
   return (
     <Sidebar {...props}>
      
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
         {routes.map((item) => (
+    
           <SidebarGroup key={item.title}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>

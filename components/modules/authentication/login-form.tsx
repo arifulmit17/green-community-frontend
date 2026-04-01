@@ -53,8 +53,9 @@ export function LoginForm({
 
     try {
       const res = await loginUser(result.data)
-      const data = await res.json()
-      console.log(data);
+      console.log("Login response:", res);
+      const data =res
+      console.log("Login data:",data);
 
       if (!data.success) {
         setError(data.message)
