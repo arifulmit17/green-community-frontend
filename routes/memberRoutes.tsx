@@ -12,11 +12,11 @@ export const memberRoutes: Route[] = [
       },
       {
         title: "Create Ideas",
-        url: "/dashboard/createIdeas",
+        url: "/dashboard/createidea",
       },
       {
         title: "My Ideas",
-        url: "/dashboard/myIdeas",
+        url: "/dashboard/myidea",
       },
       
     ],
