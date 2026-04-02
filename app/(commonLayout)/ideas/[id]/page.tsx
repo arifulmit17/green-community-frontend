@@ -35,10 +35,9 @@ export default function IdeaDetailsPage() {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea/${id}`,
           {
-            headers: {
-      Authorization: `Bearer ${token}`,
-    },
+            credentials: "include",
           }
+          
         )
 
         const {data} = await res.json()

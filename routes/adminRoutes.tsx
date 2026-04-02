@@ -12,11 +12,11 @@ export const adminRoutes: Route[] = [
       },
       {
         title: "All Ideas",
-        url: "/admin-dashboard/allIdeas",
+        url: "/admin-dashboard/allideas",
       },
       {
         title: "All Members",
-        url: "/admin-dashboard/allMembers",
+        url: "/admin-dashboard/allmembers",
       },
       {
         title: "Categories",

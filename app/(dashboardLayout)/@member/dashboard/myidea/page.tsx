@@ -94,7 +94,7 @@ useEffect(() => {
   }
 
   return (
-    <div className="w-11/12 mx-auto py-10 space-y-8">
+    <div suppressHydrationWarning className="w-11/12 mx-auto py-10 space-y-8">
       
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
