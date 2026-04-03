@@ -25,6 +25,7 @@ import {
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getUser, logoutUser } from "@/services/auth.service";
+import LogoutButton from "../shared/LogoutButton";
 
 interface MenuItem {
   title: string;
@@ -155,9 +156,7 @@ if (role === "MEMBER") {
            {!session ? <Button asChild variant="outline" size="sm">
               <a href={auth.login.url}>{auth.login.title}</a>
             </Button>:
-            <Button asChild variant="outline" size="sm">
-              <div onClick={handleLogout}>Logout</div>
-            </Button>}
+            <LogoutButton></LogoutButton>}
             <Button asChild size="sm">
               <a href={auth.signup.url}>{auth.signup.title}</a>
             </Button>

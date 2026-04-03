@@ -1,6 +1,7 @@
 "use client"
 
 import { stripePromise } from "@/lib/stripe"
+import { Button } from "../ui/button"
 
 export default function PaymentButton() {
   const handlePayment = async () => {
@@ -24,8 +25,8 @@ export default function PaymentButton() {
   }
 
   return (
-    <button onClick={handlePayment}>
+    <Button onClick={handlePayment}>
       Pay Now 💳
-    </button>
+    </Button>
   )
 }

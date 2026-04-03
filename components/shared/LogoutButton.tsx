@@ -9,7 +9,15 @@ import { toast } from 'sonner';
 
 export default function LogoutButton() {
     const handleLogout = async () => {
-    logoutUser()
+     const res=await logoutUser()
+     if (res?.success) {
+        toast.success("👋 Logged out successfully")
+        
+        // optional redirect
+        window.location.href = "/login"
+      } else {
+        toast.error(res?.message || "Logout failed")
+      }
 }
   return (
     <div>

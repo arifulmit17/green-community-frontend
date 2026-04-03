@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import PaymentButton from "@/components/shared/PaymentButton"
+import DeleteIdeaButton from "@/components/shared/DeleteIdea"
 
 type Idea = {
   id: string
@@ -69,9 +71,7 @@ export default function IdeaDetailsPage() {
           This idea is paid. Purchase to unlock full content.
         </p>
 
-        <Button className="mt-5 bg-green-600 hover:bg-green-700">
-          Unlock for ৳100
-        </Button>
+         <PaymentButton></PaymentButton>
       </div>
     )
 
@@ -165,6 +165,10 @@ export default function IdeaDetailsPage() {
           </div>
         )}
       </section>
+      {/* {Delete idea} */}
+      <div>
+        <DeleteIdeaButton ideaId={id as string}></DeleteIdeaButton>
+      </div>
 
       {/* 🔙 Back */}
       <div className="mt-10">
