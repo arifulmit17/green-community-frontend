@@ -1,5 +1,7 @@
 import Link from "next/link"
-
+import IdeaStatusActions from "../shared/ChangeIdeaStatus"
+import { useEffect, useState } from "react"
+import { getUser } from "@/services/auth.service"
 
 type Idea = {
   id: string
@@ -103,7 +105,8 @@ export default function IdeaCard({ idea}: { idea: Idea;  }) {
           {idea?.isPaid ? `৳${idea?.price}` : "Free"}
         </span>
 
-   
+    {/* Status update */}
+         <IdeaStatusActions ideaId={idea.id} currentStatus={idea.status} />
          
 
         <Link

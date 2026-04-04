@@ -47,5 +47,48 @@ voteIdea : async function (
 
     return { success: false }
   }
+},
+
+
+
+ updateIdeaStatus: async  function(
+  ideaId: string,
+  status: "UNDER_REVIEW" | "APPROVED" | "REJECTED"
+) {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/api/idea/${ideaId}/status/`, // ⚠️ adjust if your route differs
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // 🔐 for cookie auth
+        body: JSON.stringify({ status }),
+      }
+    )
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      return {
+        success: false,
+        message: data?.message || "Failed to update status",
+      }
+    }
+
+    return {
+      success: true,
+      data: data.data,
+      message: data.message,
+    }
+  } catch (error) {
+    console.error("Update status error:", error)
+
+    return {
+      success: false,
+      message: "Something went wrong",
+    }
+  }
 }
 }

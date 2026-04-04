@@ -2,7 +2,8 @@
 
 import IdeaCard from '@/components/cards/IdeaCard'
 import SearchFormCustom from '@/components/shared/SearchFormCustom'
-import React, { useState } from 'react'
+import { getUser } from '@/services/auth.service'
+import React, { useEffect, useState } from 'react'
 
 type Idea = {
   id: string
@@ -27,7 +28,7 @@ type Idea = {
 export default function IdeaPage() {
 
   const [ideas, setIdeas] = useState<Idea[]>([])
-
+   
   return (
     <div className='flex flex-col gap-10'>
 
@@ -36,9 +37,9 @@ export default function IdeaPage() {
 
       {/* 🌱 Ideas Grid */}
       <div className="w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5">
-        {ideas.length > 0 ? (
+        {ideas.length > 0  ? (
           ideas.map((idea) => (
-            <IdeaCard key={idea.id} idea={idea} />
+            <IdeaCard key={idea.id} idea={idea}/>
           ))
         ) : (
           <div className="col-span-full text-center py-10 text-muted-foreground">

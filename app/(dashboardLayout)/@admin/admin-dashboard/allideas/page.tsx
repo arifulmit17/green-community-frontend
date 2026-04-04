@@ -1,7 +1,7 @@
 "use client"
 
-import IdeaCard from '@/components/cards/IdeaCard'
-import SearchFormCustom from '@/components/shared/SearchFormCustom'
+
+import IdeaCardAdmin from '@/components/cards/IdeaCardAdmin'
 import React, { useEffect, useState } from 'react'
 
 type Idea = {
@@ -66,7 +66,7 @@ export default function IdeaPage() {
       <div className="w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5">
         {ideas.length > 0 ? (
           ideas.map((idea) => (
-            <IdeaCard key={idea.id} idea={idea} />
+            <IdeaCardAdmin key={idea.id} idea={idea} />
           ))
         ) : (
           <div className="col-span-full text-center py-10 text-muted-foreground">
