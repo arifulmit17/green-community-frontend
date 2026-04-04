@@ -1,5 +1,7 @@
 import Link from "next/link"
 
+import VoteButtons from './../shared/VoteButton';
+
 
 type Idea = {
   id: string
@@ -19,7 +21,7 @@ type Idea = {
   }[]
 }
 
-export default function IdeaCard({ idea}: { idea: Idea;  }) {
+export default function IdeaCard({ idea}: { idea: Idea; }) {
     
   
   
@@ -70,6 +72,7 @@ export default function IdeaCard({ idea}: { idea: Idea;  }) {
 
       {/* 📊 Stats */}
       <div className="flex items-center justify-between">
+        <VoteButtons ideaId={idea.id} votes={idea.votes} />
         
         {/* Votes */}
         <div>

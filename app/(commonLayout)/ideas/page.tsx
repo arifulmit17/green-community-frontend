@@ -28,6 +28,16 @@ type Idea = {
 export default function IdeaPage() {
 
   const [ideas, setIdeas] = useState<Idea[]>([])
+  const [user, setUser] = useState(null)
+
+  useEffect(() => { 
+    const fetchUser = async () => {
+      const data = await getUser()
+      setUser(data)
+    }
+    fetchUser()
+  },[])
+  console.log(user);
    
   return (
     <div className='flex flex-col gap-10'>
