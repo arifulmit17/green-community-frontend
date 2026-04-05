@@ -1,9 +1,15 @@
 "use client"
 
+import { useState } from "react"
 import { stripePromise } from "@/lib/stripe"
 import { Button } from "../ui/button"
 
+import { Elements } from "@stripe/react-stripe-js"
+import CheckoutForm from "./CheckoutForm"
+
 export default function PaymentButton() {
+  const [clientSecret, setClientSecret] = useState<string | null>(null)
+
   const handlePayment = async () => {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/payment/create-payment-intent`,
@@ -13,20 +19,30 @@ export default function PaymentButton() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: 1000, // $10
+          amount: 1000, // ৳1000
         }),
       }
     )
 
-    const { clientSecret } = await res.json()
+    const data = await res.json()
 
-    const stripe = await stripePromise
-
+    setClientSecret(data.clientSecret)
   }
 
   return (
-    <Button onClick={handlePayment}>
-      Pay Now 💳
-    </Button>
+    <div className="space-y-4">
+      {!clientSecret && (
+        <Button onClick={handlePayment}>
+          Pay Now 💳
+        </Button>
+      )}
+
+      {/* 🌿 Show Checkout Form */}
+      {clientSecret && (
+        <Elements stripe={stripePromise} options={{ clientSecret }}>
+          <CheckoutForm clientSecret={clientSecret} />
+        </Elements>
+      )}
+    </div>
   )
 }
