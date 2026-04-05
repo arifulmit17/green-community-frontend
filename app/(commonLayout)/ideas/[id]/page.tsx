@@ -43,9 +43,15 @@ export default function IdeaDetailsPage() {
         )
 
         const {data} = await res.json()
-        console.log(data);
+        console.log("idea data:",data);
 
         // 🔒 Paid idea protection
+
+        const result = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/purchase/check/${id}`, {
+  credentials: "include",
+})
+const { purchased } = await result.json()
+console.log(purchased);
         if (data?.message) {
           setLocked(true)
         } else {
@@ -71,7 +77,7 @@ export default function IdeaDetailsPage() {
           This idea is paid. Purchase to unlock full content.
         </p>
 
-         <PaymentButton></PaymentButton>
+         <PaymentButton ideaId={id as string}></PaymentButton>
       </div>
     )
 

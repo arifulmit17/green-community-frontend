@@ -7,9 +7,9 @@ import { Button } from "../ui/button"
 import { Elements } from "@stripe/react-stripe-js"
 import CheckoutForm from "./CheckoutForm"
 
-export default function PaymentButton() {
+export default function PaymentButton({ ideaId }: { ideaId: string }) {
   const [clientSecret, setClientSecret] = useState<string | null>(null)
-
+  console.log(ideaId);
   const handlePayment = async () => {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/payment/create-payment-intent`,
@@ -18,8 +18,10 @@ export default function PaymentButton() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({
           amount: 1000, // ৳1000
+          ideaId: ideaId,
         }),
       }
     )
