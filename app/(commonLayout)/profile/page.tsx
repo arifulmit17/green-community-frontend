@@ -85,8 +85,6 @@ export default function ProfilePage() {
           </p>
         </div>
 
-        {/* Action */}
-        <Button variant="outline">Edit Profile</Button>
       </div>
 
       {/* 📊 Stats */}
