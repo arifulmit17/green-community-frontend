@@ -1,17 +1,11 @@
 export const dynamic = "force-dynamic"
-import Image from "next/image"
+import { redirect } from "next/navigation";
 
 
-
-
-export default async function ProfilePage() {
- 
-  return (
-    <div>
-        <h1>This is Member dashboard</h1>
-    </div>
-  )
-
+export default function MemberDashboard() {
+  redirect("dashboard/profile");
+    
+  
 }
    
       

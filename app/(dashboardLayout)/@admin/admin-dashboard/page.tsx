@@ -1,15 +1,9 @@
 export const dynamic = "force-dynamic"
+import { redirect } from "next/navigation";
 
 
-
-
-
-export default async function ProfilePage() {
- 
-  return (
-    <div>
-        <h1>This is admin dashboard</h1>
-    </div>
-  )
-
+export default function AdminDashboard() {
+  redirect("/admin-dashboard/allideas");
+    
+  
 }
