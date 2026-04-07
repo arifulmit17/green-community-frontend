@@ -2,7 +2,8 @@ import Categories from "@/components/homepage/Categories";
 import FaqSection from "@/components/homepage/FaqSection";
 import { Hero } from "@/components/homepage/Hero";
 import { NewsletterSection } from "@/components/homepage/Newsletter";
-import PopularSessions from "@/components/homepage/PopularSessions";
+import PopularIdeas from "@/components/homepage/PopularIdeas";
+
 
 
 export default function Home() {
@@ -13,10 +14,10 @@ export default function Home() {
       </section>
       <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-80">
             <div className="w-full text-5xl text-center"> 
-               <h1 >Popular Sessions</h1>
+               <h1 >Popular Ideas</h1>
             </div>
             
-           <PopularSessions></PopularSessions>
+           <PopularIdeas></PopularIdeas>
       </section>
       <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-10">
             <div className="w-full text-5xl text-center"> 

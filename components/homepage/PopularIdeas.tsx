@@ -13,13 +13,13 @@ type Session = {
   votes: { type: "UP" | "DOWN" }[]
 }
 
-export default function PopularSessions() {
-  const [sessions, setSessions] = useState<Session[]>([])
+export default function PopularIdeas() {
+  const [Ideas, setIdeas] = useState<Session[]>([])
   const [loading, setLoading] = useState(true)
-  console.log("Popular Sessions:", sessions);
+  console.log("Popular Ideas:", Ideas);
 
   useEffect(() => {
-    const fetchSessions = async () => {
+    const fetchIdeas = async () => {
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea`,
@@ -44,15 +44,15 @@ const sorted = ideas.sort((a: Session, b: Session) => {
   return scoreB - scoreA
 })
 
-        setSessions(sorted.slice(0, 3)) // top 3
+        setIdeas(sorted.slice(0, 3)) // top 3
       } catch (err) {
-        console.error("Failed to fetch sessions:", err)
+        console.error("Failed to fetch Ideas:", err)
       } finally {
         setLoading(false)
       }
     }
 
-    fetchSessions()
+    fetchIdeas()
   }, [])
 
   return (
@@ -60,7 +60,7 @@ const sorted = ideas.sort((a: Session, b: Session) => {
 
       {/* 🌿 Header */}
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">🔥 Popular Sessions</h2>
+        <h2 className="text-2xl font-bold">🔥 Popular Ideas</h2>
 
         <Link
           href="/ideas"
@@ -72,12 +72,12 @@ const sorted = ideas.sort((a: Session, b: Session) => {
 
       {/* Loading */}
       {loading && (
-        <p className="text-muted-foreground">Loading sessions...</p>
+        <p className="text-muted-foreground">Loading Ideas...</p>
       )}
 
-      {/* Sessions Grid */}
+      {/* Ideas Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {sessions.map((session) => {
+        {Ideas.map((session) => {
           const voteCount = session.votes.reduce(
             (acc, v) => (v.type === "UP" ? acc + 1 : acc - 1),
             0
@@ -129,9 +129,9 @@ const sorted = ideas.sort((a: Session, b: Session) => {
       </div>
 
       {/* Empty */}
-      {!loading && sessions.length === 0 && (
+      {!loading && Ideas.length === 0 && (
         <p className="text-center text-muted-foreground">
-          No popular sessions yet 🌿
+          No popular Ideas yet 🌿
         </p>
       )}
     </div>
