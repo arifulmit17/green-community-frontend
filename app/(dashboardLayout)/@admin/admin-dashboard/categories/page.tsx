@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
 import { useParams, useRouter } from "next/navigation"
 import { CategoryCard } from "@/components/cards/CategoryCard"
+import { createCategory, getCategories } from "@/services/category2.service"
 
 type Category = {
   id: string
@@ -30,22 +30,23 @@ export default function CreateCategoryPage() {
     setLoading(true)
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({ name }),
-        }
-      )
+      // const res = await fetch(
+      //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`,
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     credentials: "include",
+      //     body: JSON.stringify({ name }),
+      //   }
+      // )
 
-      const data = await res.json()
+      const data =await createCategory(name)
+      console.log("category data",data);
 
-      if (!res.ok) {
-        toast.error(data?.message || "Failed to create category")
+      if (!data) {
+        toast.error( "Failed to create category")
         return
       }
 
@@ -62,10 +63,7 @@ export default function CreateCategoryPage() {
   useEffect(() => {
       const fetchCategories = async () => {
         try {
-          const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`
-          )
-          const {data} = await res.json()
+          const data=await getCategories()
           setCategories(data)
         } catch (err) {
           console.error("Category fetch error:", err)
@@ -141,7 +139,7 @@ export default function CreateCategoryPage() {
         </div>
         
       
-    <div>
+    <div className="flex gap-5">
       {
         categories.map((category) => (
           <CategoryCard key={category.id} category={category}>

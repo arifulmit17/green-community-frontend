@@ -37,8 +37,7 @@ export const createIdea=async function(form:{
        const data = await res.json()
 
       if (!res.ok) {
-        toast.error(data?.message || "Failed to create idea")
-        return
+        throw new Error(data?.message || "Failed to create idea")
       }
       
 

@@ -1,18 +1,16 @@
 import React from 'react'
 import { CategoryCard } from '../cards/CategoryCard';
-import { categoriesService } from '@/services/category.service';
+import { getCategories } from '@/services/category2.service';
 
 
 
 export default async function Categories() {
-    const {data}=await categoriesService?.getAllCategories()
-        const categoryList=await data?.json();
-        console.log(categoryList.data);
+    const categoryList=await getCategories()
         
   return (
     <div className="w-11/12 grid-cols-1  grid lg:grid-cols-3 gap-5">
-      {categoryList?.data.length > 0 ? (
-        categoryList?.data.map((category) => (
+      {categoryList?.length > 0 ? (
+        categoryList?.slice(0, 3).map((category) => (
           <CategoryCard key={category?.id} category={category} />
         ))
       ) : (
