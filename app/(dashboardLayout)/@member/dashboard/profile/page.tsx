@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import EditProfileModal from "@/components/shared/EditProfileModal"
+import { getUser } from "@/services/auth.service"
+import { fetchIdeasByUser } from "@/services/idea2.service"
+
 
 type Idea = {
   id: string
@@ -29,12 +32,9 @@ export default function ProfilePage() {
   // 🌿 Fetch user
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/me`,
-        { credentials: "include" }
-      )
-      const result = await res.json()
-      setUser(result.data)
+      const userData = await getUser()
+      
+      setUser(userData)
     }
 
     fetchUser()
@@ -43,15 +43,9 @@ export default function ProfilePage() {
   // 🌱 Fetch user's ideas
   useEffect(() => {
     const fetchIdeas = async () => {
-      if (!user?.id) return
-
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea/user/${user.id}`,
-        { credentials: "include" }
-      )
-
-      const { data } = await res.json()
-      setIdeas(data)
+      const ideaData=await fetchIdeasByUser(user?.id || "")
+      
+      setIdeas(ideaData)
       setLoading(false)
     }
 
@@ -59,7 +53,7 @@ export default function ProfilePage() {
   }, [user])
 
   // 📊 Calculate stats
-  const totalVotes = ideas.reduce((acc, idea) => {
+  const totalVotes = ideas?.reduce((acc, idea) => {
     return (
       acc +
       idea.votes.reduce((a, v) => (v.type === "UP" ? a + 1 : a - 1), 0)

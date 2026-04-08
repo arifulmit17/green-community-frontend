@@ -1,5 +1,5 @@
-"use server";
 
+"use server"
 
 import { cookies } from "next/headers";
 import { env } from "process"
@@ -39,7 +39,8 @@ export const signupUser = async (userData: {
       // ✅ FIX: token is directly in result.token
       cookieStore.set("token", data.token, {
         httpOnly: true,
-        secure: false, // true in production
+        secure: true, // true in production
+        sameSite: "none",
         path: "/",
       });
     }
@@ -78,7 +79,8 @@ export const loginUser = async (userData: any) => {
       // ✅ FIX: token is directly in result.token
       cookieStore.set("token", result.token, {
         httpOnly: true,
-        secure: false, // true in production
+        secure: true, // true in production
+        sameSite: "none",
         path: "/",
       });
     }
@@ -109,7 +111,7 @@ export const getUser = async () => {
     console.log("User data",result);
 
     if (!result.success) return null;
-
+     
     return result.data;
   } catch (error) {
     console.log("Get user error:", error);

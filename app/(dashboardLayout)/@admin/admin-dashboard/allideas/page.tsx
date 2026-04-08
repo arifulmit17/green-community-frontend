@@ -29,7 +29,7 @@ export default function IdeaPage() {
   const [ideas, setIdeas] = useState<Idea[]>([])
   const [loading, setLoading] = useState(true)
    useEffect(() => {
-      const fetchMyIdeas = async () => {
+      const fetchAllIdeas = async () => {
         try {
           
               const res = await fetch(
@@ -54,7 +54,7 @@ export default function IdeaPage() {
         }
       }
   
-      fetchMyIdeas()
+      fetchAllIdeas()
     }, [])
   
 

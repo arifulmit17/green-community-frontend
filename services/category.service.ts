@@ -2,7 +2,7 @@
 import { env } from "process"
 
 const API_URL=env.API_URL
-
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL; 
 
 
 export const categoriesService = {

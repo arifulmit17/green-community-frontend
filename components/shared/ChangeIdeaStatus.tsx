@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
-import { ideaService } from "@/services/idea.service"
+
 import { getUser } from "@/services/auth.service"
+import { updateIdeaStatus } from "@/services/idea2.service"
 
 type Props = {
   ideaId: string
@@ -23,7 +24,7 @@ export default function IdeaStatusActions({
     setLoading(true)
 
     try {
-      const res = await ideaService.updateIdeaStatus(ideaId, status)
+      const res = await updateIdeaStatus(ideaId, status)
 
       if (res.success) {
         toast.success(`🌿 Status updated to ${status}`)

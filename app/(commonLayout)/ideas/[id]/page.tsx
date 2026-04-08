@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import PaymentButton from "@/components/shared/PaymentButton"
 import DeleteIdeaButton from "@/components/shared/DeleteIdea"
+import { fetchIdeaById } from "@/services/idea2.service"
 
 type Idea = {
   id: string
@@ -32,17 +33,10 @@ export default function IdeaDetailsPage() {
   useEffect(() => {
     const fetchIdea = async () => {
       try {
-        const token = localStorage.getItem("token")
 
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea/${id}`,
-          {
-            credentials: "include",
-          }
-          
-        )
+        const data= await fetchIdeaById(id as string)
 
-        const {data} = await res.json()
+        
         console.log("idea data:",data);
 
         // 🔒 Paid idea protection

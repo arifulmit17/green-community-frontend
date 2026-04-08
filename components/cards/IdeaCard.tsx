@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import VoteButtons from './../shared/VoteButton';
+import DeleteIdeaButton from "../shared/DeleteIdea";
 
 
 type Idea = {
@@ -105,6 +106,7 @@ export default function IdeaCard({ idea}: { idea: Idea; }) {
         <span className="text-sm text-muted-foreground">
           {idea?.isPaid ? `৳${idea?.price}` : "Free"}
         </span>
+        <DeleteIdeaButton ideaId={idea.id} />
 
    
          

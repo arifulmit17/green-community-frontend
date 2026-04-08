@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
+import { createIdea } from "@/services/idea2.service"
 
 type Category = {
   id: string
@@ -61,29 +62,14 @@ export default function CreateIdeaPage() {
     setLoading(true)
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include", // 🔐 send cookie
-          body: JSON.stringify({
-            ...form,
-            price: form.isPaid ? Number(form.price) : null,
-          }),
-        }
-      )
+      const idea=createIdea(form)
 
-      const data = await res.json()
+      console.log(idea);
+      
+         toast.success("🌿 Idea created successfully!")
+      
 
-      if (!res.ok) {
-        toast.error(data?.message || "Failed to create idea")
-        return
-      }
-
-      toast.success("🌿 Idea created successfully!")
+     
 
       // reset form
       setForm({

@@ -3,6 +3,11 @@
 import { useEffect, useState } from "react"
 import IdeaCard from "@/components/cards/IdeaCard"
 import { Button } from "@/components/ui/button"
+import { getUser } from "@/services/auth.service"
+
+import { fetchIdeasByUser } from './../../../services/idea2.service';
+
+
 
 type Idea = {
   id: string
@@ -27,35 +32,26 @@ export default function ProfilePage() {
 
   // 🌿 Fetch user
   useEffect(() => {
-    const fetchUser = async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/me`,
-        { credentials: "include" }
-      )
-      const result = await res.json()
-      setUser(result.data)
-    }
-
-    fetchUser()
-  }, [])
+      const fetchUser = async () => {
+        const userData = await getUser()
+        
+        setUser(userData)
+      }
+  
+      fetchUser()
+    }, [])
 
   // 🌱 Fetch user's ideas
   useEffect(() => {
-    const fetchIdeas = async () => {
-      if (!user?.id) return
-
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea/user/${user.id}`,
-        { credentials: "include" }
-      )
-
-      const { data } = await res.json()
-      setIdeas(data)
-      setLoading(false)
-    }
-
-    fetchIdeas()
-  }, [user])
+      const fetchIdeas = async () => {
+        const ideaData=await fetchIdeasByUser(user?.id || "")
+        
+        setIdeas(ideaData)
+        setLoading(false)
+      }
+  
+      fetchIdeas()
+    }, [user])
 
   // 📊 Calculate stats
   const totalVotes = ideas.reduce((acc, idea) => {

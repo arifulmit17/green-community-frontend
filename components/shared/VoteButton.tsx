@@ -1,9 +1,10 @@
 "use client"
 
+import { voteIdea } from "@/services/idea2.service"
 import { useState } from "react"
 
 import { toast } from "sonner"
-import { ideaService } from './../../services/idea.service';
+
 
 type Props = {
   ideaId: string
@@ -46,7 +47,7 @@ export default function VoteButtons({
     setVoteCount(newCount)
 
     try {
-      const res = await ideaService.voteIdea(ideaId, type)
+      const res = await voteIdea(ideaId, type)
 
       if (!res.success) {
         toast.error("Vote failed")

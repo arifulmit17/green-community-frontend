@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
-import { ideaService } from "@/services/idea.service"
+import { deleteIdea } from "@/services/idea2.service"
 
 export default function DeleteIdeaButton({ ideaId }: { ideaId: string  }) {
   const router = useRouter()
@@ -17,7 +17,7 @@ export default function DeleteIdeaButton({ ideaId }: { ideaId: string  }) {
     if (!confirmed) return
 
     try {
-      await ideaService.deleteIdea(ideaId)
+      await deleteIdea(ideaId)
       toast.success("Idea deleted successfully")
       router.refresh()
     } catch (error) {
