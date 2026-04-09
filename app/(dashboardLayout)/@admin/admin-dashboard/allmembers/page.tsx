@@ -1,15 +1,16 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { ChangeUserRole, ChangeUserStatus, getAllUsers } from "@/services/user.service"
+import { toast } from "sonner"
 
 type User = {
   id: string
   name: string
   email: string
   role: "ADMIN" | "MEMBER"
-  status?: "ACTIVE" | "BLOCKED"
+  isActive?: true | false
 }
 
 export default function MembersPage() {
@@ -21,22 +22,17 @@ export default function MembersPage() {
   // 🌿 Fetch users
   useEffect(() => {
     const fetchUsers = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users`,
-          { credentials: "include" }
-        )
-
-        const result = await res.json()
-        const data = result.data || []
+         try {
+        const data=await getAllUsers()
 
         setUsers(data)
         // setFilteredUsers(data)
       } catch (err) {
-        console.error(err)
+        toast.error("Failed to load users")
       } finally {
         setLoading(false)
       }
+     
     }
 
     fetchUsers()
@@ -53,52 +49,33 @@ export default function MembersPage() {
   // 🔥 Change Role
   const handleRoleChange = async (id: string, role: string) => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({ role }),
-        }
-      )
+      const data=await ChangeUserRole(id, role)
 
-      const result = await res.json()
-
-      if (result.success) {
-        setUsers(result.data)
+      if (data.success) {
+        setUsers(data.data)
+        toast.success("User role updated")
       }
     } catch (err) {
-      console.error(err)
+      toast.error("Failed to update role")
     }
   }
 
-  const handleStatusChange = async (id: string, status: string) => {
+  const handleStatusChange = async (id: string  , isActive: boolean) => {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${id}/status`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ status }),
-      }
-    )
-
-    const result = await res.json()
+    const result = await ChangeUserStatus(id, isActive)
+   
 
     if (result.success) {
       // ✅ update only that user (not whole array)
-      setUsers(result.data)
+      setUsers(result)
+      toast.success("User status updated")
     }
   } catch (err) {
-    console.error(err)
+    
+    toast.error("Failed to update status")
   }
 }
+console.log("status update:",users);
 
   return (
     <div className="w-11/12 mx-auto py-10 space-y-8">
@@ -162,12 +139,12 @@ export default function MembersPage() {
   <td className="p-3">
     <span
       className={`px-2 py-1 rounded text-xs ${
-        user.status === "BLOCKED"
+        user.isActive === false
           ? "bg-red-100 text-red-700"
           : "bg-blue-100 text-blue-700"
       }`}
     >
-      {user.status || "ACTIVE"}
+      {user.isActive === false ? "BLOCKED" : "ACTIVE"}
     </span>
   </td>
 
@@ -197,12 +174,12 @@ export default function MembersPage() {
     )}
 
     {/* Status */}
-    {user.status === "BLOCKED" || user.role === "ADMIN" ? (
+    {user.isActive === false || user.role === "ADMIN" ? (
       <Button
         size="sm"
         variant="outline"
         onClick={() =>
-          user.id && handleStatusChange(user.id, "ACTIVE")
+          user.id && handleStatusChange(user.id, true)
         }
       >
         Unblock
@@ -212,7 +189,7 @@ export default function MembersPage() {
         size="sm"
         variant="destructive"
         onClick={() =>
-          user.id && handleStatusChange(user.id, "BLOCKED")
+          user.id && handleStatusChange(user.id, false)
         }
       >
         Block

@@ -2,6 +2,10 @@ import Link from "next/link"
 
 import VoteButtons from './../shared/VoteButton';
 import DeleteIdeaButton from "../shared/DeleteIdea";
+import { useEffect, useState } from "react";
+import { getUser } from "@/services/auth.service";
+
+import EditIdeaModal from "../shared/EditIdeaModal";
 
 
 type Idea = {
@@ -12,6 +16,7 @@ type Idea = {
   price?: number
   status: "UNDER_REVIEW" | "APPROVED" | "REJECTED"
   author: {
+    id: string
     name: string
   }
   category: {
@@ -23,9 +28,15 @@ type Idea = {
 }
 
 export default function IdeaCard({ idea}: { idea: Idea; }) {
-    
-  
-  
+    const [user, setUser] = useState<any>(null)
+  useEffect(()=>{
+    const fetchUser=async()=>{
+        const user=await getUser()
+        setUser(user)
+    }
+    fetchUser()
+  },[])
+ 
 
   // 🔥 Calculate vote score
   const voteCount = idea.votes.reduce((acc, v) => {
@@ -106,7 +117,9 @@ export default function IdeaCard({ idea}: { idea: Idea; }) {
         <span className="text-sm text-muted-foreground">
           {idea?.isPaid ? `৳${idea?.price}` : "Free"}
         </span>
-        <DeleteIdeaButton ideaId={idea.id} />
+        {idea.status!="APPROVED" && idea.author?.id === user?.id && <DeleteIdeaButton ideaId={idea.id} />}
+        {idea.status!="APPROVED" && idea.author?.id === user?.id && <EditIdeaModal idea={idea}/>}
+        
 
    
          

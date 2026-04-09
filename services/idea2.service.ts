@@ -215,3 +215,47 @@ export const voteIdea = async function (
     }
   }
 }
+
+export const updateIdea = async (
+  ideaId: string,
+  payload: {
+    title?: string
+    description?: string
+    price?: number
+    isPaid?: boolean
+    categoryId?: string
+  }
+) => {
+  try {
+    const cookieStore =await cookies();
+  const token = cookieStore.get("token")?.value;
+  console.log("user token",token);
+  if (!token) return null;
+    if (!ideaId) {
+      throw new Error("Idea ID is required")
+    }
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea/${ideaId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+              Cookie: `token=${token}`,
+        },
+        body: JSON.stringify(payload),
+      }
+    )
+
+    const result = await res.json()
+
+    if (!res.ok || !result.success) {
+      throw new Error(result?.message || "Failed to update idea")
+    }
+
+    return result.data
+  } catch (error) {
+    console.error("Update idea error:", error)
+    return null
+  }
+}

@@ -17,9 +17,16 @@ export default function DeleteIdeaButton({ ideaId }: { ideaId: string  }) {
     if (!confirmed) return
 
     try {
-      await deleteIdea(ideaId)
+    const result=  await deleteIdea(ideaId)
+    console.log(result);
+    if(result){
       toast.success("Idea deleted successfully")
       router.refresh()
+    }else{
+      toast.error("Failed to delete idea")
+    }
+
+      
     } catch (error) {
       // console.error(error)
       toast.error("Failed to delete idea")
