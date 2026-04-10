@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Project name : Green Community
 
-## Getting Started
+Project Description:
 
-First, run the development server:
+Green Community is a full-stack web platform where users can share, explore, and support eco-friendly ideas.
+Users can submit innovative ideas, vote on others’ contributions, and even monetize premium ideas.
+The platform encourages collaboration and sustainability through community-driven engagement.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Live URLs:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Frontend: https://green-community-frontend.vercel.app
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Backend API: https://green-community-backend.onrender.com
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Features:
+-Authentication & User Management
+-Secure login & signup (JWT + cookies)
+-Role-based access (Admin / Member)
+-Block / Unblock users (Admin control)
+-Create, update, and delete ideas
+-View all ideas with search & filtering
+-View personal ideas (My Ideas page)
+-Edit ideas via modal UI
+-Reddit-style upvote & downvote system
+-Dynamic vote count calculation
+-Sorted ideas based on popularity
+-Paid ideas with secure checkout
+-Stripe payment integration
+-Webhook handling for payment confirmation
+-Search and category filtering
+-Pagination & sorting
+-Responsive UI
 
-## Learn More
+Technologies Used:
 
-To learn more about Next.js, take a look at the following resources:
+Frontend:
+-Next.js (App Router)
+-TypeScript
+-Tailwind CSS
+-shadcn/ui
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Backend:
+-Node.js
+-Express.js
+-TypeScript
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Database & ORM:
+-PostgreSQL
+-Prisma ORM
 
-## Deploy on Vercel
+Payments:
+-Stripe API
+-Webhooks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Authentication:
+-JWT (stored in HTTP-only cookies)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deployment:
+-Vercel (Frontend)
+-Render (Backend)
+
+Setup Instructions:
+
+Clone the repository:
+
+git clone https://github.com/your-username/green-community.git
+
+For backend setup , go to green-community directory, install npm packages, connect to database and migrate using prisma, create an env file, run server
+
+do the same for frontend repository. using nextjs and other npm packages in git repo.

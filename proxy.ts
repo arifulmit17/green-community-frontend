@@ -15,10 +15,7 @@ export async function proxy(request: NextRequest) {
   let isAuthenticated = false
     let isAdmin = false
 
-  // // Skip middleware for verify-email route
-  // if (pathname.startsWith("/verify-email")) {
-  //   return NextResponse.next();
-  // }
+  
 console.log("from proxy");
   // Check for session token in cookies
   const data = await getUser()
