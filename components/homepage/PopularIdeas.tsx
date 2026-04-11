@@ -60,7 +60,6 @@ const sorted = ideas.sort((a: Session, b: Session) => {
 
       {/* 🌿 Header */}
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">🔥 Popular Ideas</h2>
 
         <Link
           href="/ideas"

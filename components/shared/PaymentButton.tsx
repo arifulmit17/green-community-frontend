@@ -6,27 +6,13 @@ import { Button } from "../ui/button"
 
 import { Elements } from "@stripe/react-stripe-js"
 import CheckoutForm from "./CheckoutForm"
+import { createPaymentIntent } from "@/services/payment.service"
 
-export default function PaymentButton({ ideaId }: { ideaId: string }) {
+export default function PaymentButton({ ideaId, price }: { ideaId: string; price: number | undefined}) {
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   console.log(ideaId);
   const handlePayment = async () => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/payment/create-payment-intent`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          amount: 1000, // ৳1000
-          ideaId: ideaId,
-        }),
-      }
-    )
-
-    const data = await res.json()
+    const data=await createPaymentIntent(ideaId,price)
 
     setClientSecret(data.clientSecret)
   }

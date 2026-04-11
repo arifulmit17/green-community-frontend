@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import PaymentButton from "@/components/shared/PaymentButton"
 import DeleteIdeaButton from "@/components/shared/DeleteIdea"
 import { fetchIdeaById } from "@/services/idea2.service"
+import { verifyPayment } from "@/services/payment.service"
 
 type Idea = {
   id: string
@@ -16,7 +17,7 @@ type Idea = {
   description: string
   image?: string
   isPaid: boolean
-  price?: number
+  price?: number 
   status: "UNDER_REVIEW" | "APPROVED" | "REJECTED"
   author: { name: string }
   category: { name: string }
@@ -24,11 +25,18 @@ type Idea = {
   comments: any[]
 }
 
+type lockedIdea = {
+  id: string
+  price: number
+  message: string
+}
+
 export default function IdeaDetailsPage() {
   const { id } = useParams()
   const [idea, setIdea] = useState<Idea | null>(null)
   const [loading, setLoading] = useState(true)
   const [locked, setLocked] = useState(false)
+  const[lockedIdea,setLockedIdea]=useState<lockedIdea | null>(null)
 
   useEffect(() => {
     const fetchIdea = async () => {
@@ -38,14 +46,11 @@ export default function IdeaDetailsPage() {
 
         
         console.log("idea data:",data);
-
+        setLockedIdea(data)
         // 🔒 Paid idea protection
 
-        const result = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/purchase/check/${id}`, {
-  credentials: "include",
-})
-const { purchased } = await result.json()
-console.log(purchased);
+        const paymentIdea=await verifyPayment({ paymentIntentId: "", ideaId: id as string })
+        console.log(paymentIdea);
         if (data?.message) {
           setLocked(true)
         } else {
@@ -63,7 +68,7 @@ console.log(purchased);
 
   if (loading) return <p className="text-center py-20">Loading...</p>
 
-  if (!idea && locked)
+  if (!idea && lockedIdea && locked)
     return (
       <div className="text-center py-20">
         <h2 className="text-2xl font-semibold">🔒 Premium Idea</h2>
@@ -71,16 +76,16 @@ console.log(purchased);
           This idea is paid. Purchase to unlock full content.
         </p>
 
-         <PaymentButton ideaId={id as string}></PaymentButton>
+         <PaymentButton ideaId={id as string} price={lockedIdea.price}></PaymentButton>
       </div>
     )
 
   if (!idea) return <p className="text-center py-20">Idea not found</p>
 
   // 🔥 Vote count
-  const voteCount = idea.votes.reduce((acc, v) => {
-    return v.type === "UP" ? acc + 1 : acc - 1
-  }, 0)
+  const voteCount = idea?.votes?.reduce((acc, v) => {
+  return v.type === "UP" ? acc + 1 : acc - 1
+}, 0) ?? 0
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-10">
@@ -92,7 +97,7 @@ console.log(purchased);
         </h1>
 
         <p className="text-muted-foreground mt-2">
-          🌿 {idea.category.name} · by {idea.author.name}
+          🌿 {idea?.category?.name} · by {idea?.author?.name}
         </p>
       </div>
 

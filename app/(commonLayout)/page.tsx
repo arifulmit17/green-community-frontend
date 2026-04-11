@@ -12,7 +12,7 @@ export default function Home() {
       <section className="h-1000px w-full ">
           <Hero></Hero>
       </section>
-      <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-80">
+      <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-40">
             <div className="w-full text-5xl text-center"> 
                <h1 >Popular Ideas</h1>
             </div>
@@ -25,13 +25,6 @@ export default function Home() {
             </div>
             
            <Categories></Categories>
-      </section>
-      <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-10">
-            <div className="w-full text-5xl text-center"> 
-               <h1 >Member Reviews</h1>
-            </div>
-            
-           {/* <ReviewSection></ReviewSection> */}
       </section>
       <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-10">
             <div className="w-full text-5xl text-center"> 
