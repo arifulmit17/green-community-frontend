@@ -124,12 +124,18 @@ export default function IdeaCard({ idea}: { idea: Idea; }) {
    
          
 
-        <Link
+        {user && <Link
           href={`/ideas/${idea?.id}`}
           className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400"
         >
           View Idea →
-        </Link>
+        </Link>}
+        {!user && <Link
+          href={`/login`}
+          className="rounded-lg bg-yellow-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+          View Idea →
+        </Link>}
       </div>
     </div>
   )
