@@ -31,10 +31,10 @@ export default function AboutPage() {
 
         <div className="relative h-64 w-full">
           <Image
-            src="/mission.jpg"
+            src="/green.webp"
             alt="Mission"
             fill
-            className="object-cover rounded-2xl"
+            className="object-contain rounded-2xl"
           />
         </div>
       </section>
@@ -43,10 +43,10 @@ export default function AboutPage() {
       <section className="grid md:grid-cols-2 gap-10 items-center">
         <div className="relative h-64 w-full order-2 md:order-1">
           <Image
-            src="/vision.jpg"
+            src="/green.webp"
             alt="Vision"
             fill
-            className="object-cover rounded-2xl"
+            className="object-contain rounded-2xl"
           />
         </div>
 

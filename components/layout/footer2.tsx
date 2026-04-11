@@ -59,7 +59,7 @@ const Footer2 = ({
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
             <div className="col-span-2 mb-8 lg:mb-0">
               <div className="flex flex-col items-start gap-2 lg:justify-start">
-                <h1>Green Community</h1>
+                <h1> 🌿 Green Community</h1>
                  <p>{copyright}</p>
               </div>
               

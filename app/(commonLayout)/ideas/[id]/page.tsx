@@ -49,7 +49,7 @@ export default function IdeaDetailsPage() {
         setLockedIdea(data)
         // 🔒 Paid idea protection
 
-        const paymentIdea=await verifyPayment({ paymentIntentId: "", ideaId: id as string })
+        const paymentIdea=await verifyPayment({ ideaId: id as string })
         console.log(paymentIdea);
         if (data?.message) {
           setLocked(true)
@@ -75,6 +75,7 @@ export default function IdeaDetailsPage() {
         <p className="text-muted-foreground mt-2">
           This idea is paid. Purchase to unlock full content.
         </p>
+        <h2>Price: ${lockedIdea.price}</h2>
 
          <PaymentButton ideaId={id as string} price={lockedIdea.price}></PaymentButton>
       </div>

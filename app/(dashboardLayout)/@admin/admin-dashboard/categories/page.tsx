@@ -139,7 +139,7 @@ export default function CreateCategoryPage() {
         </div>
         
       
-    <div className="flex gap-5">
+    <div className="lg:flex flex-col gap-5">
       {
         categories.map((category) => (
           <CategoryCard key={category.id} category={category}>

@@ -73,7 +73,7 @@ const Navbar1 = ({
     
     
     alt: "logo",
-    title: "Green Community",
+    title: "🌿 Green Community",
   },
   menu = [
     { title: "Home", url: "/" },
