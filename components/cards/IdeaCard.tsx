@@ -84,7 +84,7 @@ export default function IdeaCard({ idea}: { idea: Idea; }) {
 
       {/* 📊 Stats */}
       <div className="flex items-center justify-between">
-        <VoteButtons ideaId={idea.id} votes={idea.votes} />
+      {idea.author?.id !== user?.id && user?.role !=="ADMIN" && <VoteButtons ideaId={idea.id} votes={idea.votes} />}  
         
         {/* Votes */}
         <div>

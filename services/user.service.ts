@@ -67,3 +67,34 @@ export const ChangeUserStatus = async (id: string, isActive: boolean) => {
     return result
 }
 
+export const updateUser= async (id: string, payload: { name?: string }) => {
+      const cookieStore =await cookies();
+      const token = cookieStore.get("token")?.value;
+      
+      if (!token) return null;
+
+       try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+             Cookie: `token=${token}`,
+          },
+           
+          body: JSON.stringify(payload),
+        }
+      )
+
+      const result = await res.json()
+      return result || null
+    } catch (error) {
+      console.error("Update user error:", error)
+      return null
+    }
+
+
+
+}
+

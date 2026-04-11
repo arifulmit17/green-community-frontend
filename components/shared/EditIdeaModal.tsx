@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { updateIdea } from "@/services/idea2.service"
+import { toast } from "sonner"
 
 export default function EditIdeaModal({ idea, onUpdated }: any) {
   const [open, setOpen] = useState(false)
@@ -29,13 +30,13 @@ export default function EditIdeaModal({ idea, onUpdated }: any) {
     setLoading(false)
 
     if (updated) {
-      alert("Idea updated successfully ✅")
+      toast.success("Idea updated successfully ✅")
       setOpen(false)
 
       // 🔥 optional: refresh parent
       onUpdated?.(updated)
     } else {
-      alert("Update failed ❌")
+      toast.error("Update failed ❌")
     }
   }
 

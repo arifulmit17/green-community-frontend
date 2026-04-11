@@ -3,6 +3,7 @@
 import IdeaCard from '@/components/cards/IdeaCard'
 import SearchFormCustom from '@/components/shared/SearchFormCustom'
 import { getUser } from '@/services/auth.service'
+import { getIdeas } from '@/services/idea2.service'
 import React, { useEffect, useState } from 'react'
 
 type Idea = {
@@ -51,6 +52,20 @@ const sortedIdeas = [...ideas].sort((a, b) => {
     }
     fetchUser()
   },[])
+
+  useEffect(() => {
+    const fetchIdeas = async () => {
+      try {
+        const res = await getIdeas()
+       
+        setIdeas(res)
+      } catch (error) {
+        console.error("Idea fetch error:", error)
+      }
+      
+  }
+  fetchIdeas()
+},[user])
   console.log(user);
 
   const totalPages = Math.ceil(sortedIdeas.length / itemsPerPage)

@@ -3,31 +3,40 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { toast } from "sonner"
+import { z } from "zod"
+
 
 export function NewsletterSection() {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
+  
+const emailSchema = z
+  .string()
+  .min(1, "Email is required")
+  .email("Please enter a valid email address")
+  .max(100, "Email is too long")
 
   const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault()
+  e.preventDefault()
 
-    if (!email) return alert("Please enter your email")
-
-    setLoading(true)
-
-    try {
-      // 👉 Replace with your API
-      console.log("Subscribed:", email)
-
-      setEmail("")
-      alert("🌱 Successfully subscribed!")
-    } catch (error) {
-      alert("Something went wrong")
-    } finally {
-      setLoading(false)
-    }
+  const validation = emailSchema.safeParse(email)
+  if (!validation.success) {
+    return toast.error(validation.error.issues[0].message)
   }
 
+  setLoading(true)
+
+  try {
+    console.log("Subscribed:", validation.data) // use validated data
+    setEmail("")
+    toast.success("🌱 Successfully subscribed!")
+  } catch (error) {
+    toast.error("Something went wrong")
+  } finally {
+    setLoading(false)
+  }
+}
   return (
     <section className="w-full py-20 bg-green-50">
       <div className="max-w-4xl mx-auto px-6 text-center">

@@ -1,6 +1,5 @@
 "use server"
 import { cookies } from "next/headers";
-import { toast } from "sonner";
 
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL; 
@@ -42,6 +41,25 @@ export const createIdea=async function(form:{
       
 
 };
+
+export const getIdeas = async function () {
+  try{
+    const res= await fetch(`${BASE_URL}/api/idea`, {
+    method: "GET",
+    cache: "no-store",
+  })
+  const result = await res.json()
+
+  if (!res.ok || !result.success) {
+    throw new Error(result?.message || "Failed to fetch ideas")
+  }
+  return result.data || []
+
+  }catch(error){
+    console.error("Fetch ideas error:", error)
+    return []
+  }
+  };
 
 export const fetchIdeaById = async (ideaId: string) => {
      const cookieStore =await cookies();
@@ -122,12 +140,12 @@ export const deleteIdea = async function (id: string) {
        headers: {
         Cookie: `token=${token}`, 
       },
+      
     })
 
     if (!res.ok) {
       return { success: false }
     }
-
     return { success: true }
   } catch (error) {
     console.error("Delete idea error:", error)
@@ -163,7 +181,7 @@ export const voteIdea = async function (
     }
   } catch (error) {
     console.error("Vote error:", error)
-
+    
     return { success: false }
   }
 };
@@ -208,7 +226,7 @@ export const voteIdea = async function (
     }
   } catch (error) {
     console.error("Update status error:", error)
-
+      
     return {
       success: false,
       message: "Something went wrong",
@@ -252,7 +270,7 @@ export const updateIdea = async (
     if (!res.ok || !result.success) {
       throw new Error(result?.message || "Failed to update idea")
     }
-
+   
     return result.data
   } catch (error) {
     console.error("Update idea error:", error)

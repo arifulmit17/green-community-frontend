@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
+import { updateUser } from "@/services/user.service"
 
 export default function EditProfileModal({
   open,
@@ -23,22 +24,9 @@ export default function EditProfileModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${user.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({ name }),
-        }
-      )
-
-      const result = await res.json()
-
+      const result = await updateUser(user.id, { name })
+   
       if (result.success) {
         onUpdate(result.data)
         setOpen(false)
