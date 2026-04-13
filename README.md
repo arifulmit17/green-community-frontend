@@ -10,7 +10,7 @@ Live URLs:
 
 Frontend: https://green-community-frontend.vercel.app
 
-Backend API: https://green-community-backend.onrender.com
+Backend API: https://green-community-backend.vercel.app/
 
 Features:
 -Authentication & User Management
