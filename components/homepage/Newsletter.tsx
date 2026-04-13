@@ -28,7 +28,7 @@ const emailSchema = z
   setLoading(true)
 
   try {
-    console.log("Subscribed:", validation.data) // use validated data
+    // console.log("Subscribed:", validation.data) // use validated data
     setEmail("")
     toast.success("🌱 Successfully subscribed!")
   } catch (error) {

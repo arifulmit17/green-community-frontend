@@ -64,7 +64,7 @@ export default function CreateIdeaPage() {
     try {
       const idea=createIdea(form)
 
-      console.log(idea);
+      // console.log(idea);
       
          toast.success("🌿 Idea created successfully!")
       

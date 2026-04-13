@@ -65,7 +65,7 @@ if (!result.success) {
 }
 
 
-    console.log("Signup payload:", payload)
+    // console.log("Signup payload:", payload)
     try {
       const { data } = await signupUser(payload)
       if(data){

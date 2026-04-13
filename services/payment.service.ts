@@ -35,7 +35,7 @@ export const createPaymentIntent = async (ideaId: string, price: number | undefi
 
 export const verifyPayment = async (
   {ideaId}: { ideaId: string }) => {
-  console.log("Payment Data:", ideaId);
+//   console.log("Payment Data:", ideaId);
   const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;    
     if (!token) return null;
@@ -49,7 +49,7 @@ export const verifyPayment = async (
     }
 })
 const  {purchased}  = await result.json()
-console.log("purchased:", purchased);
+// console.log("purchased:", purchased);
 return purchased
 
     }catch(error){

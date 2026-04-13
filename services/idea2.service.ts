@@ -16,7 +16,7 @@ export const createIdea=async function(form:{
 }){
     const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;
-  console.log("user token",token);
+  // console.log("user token",token);
   if (!token) return null;
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea`,
@@ -64,7 +64,7 @@ export const getIdeas = async function () {
 export const fetchIdeaById = async (ideaId: string) => {
      const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;
-  console.log("user token",token);
+  // console.log("user token",token);
   if (!token) return null;
   try {
     if (!ideaId) {
@@ -98,7 +98,7 @@ export const fetchIdeaById = async (ideaId: string) => {
 export const fetchIdeasByUser = async function (userId: string) {
   const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;
-  console.log("user token",token);
+  // console.log("user token",token);
   if (!token) return null;
   try {
     if (!userId) {
@@ -132,7 +132,7 @@ export const fetchIdeasByUser = async function (userId: string) {
 export const deleteIdea = async function (id: string) {
     const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;
-  console.log("user token",token);
+  // console.log("user token",token);
   if (!token) return null;
   try {
     const res = await fetch(`${BASE_URL}/api/idea/${id}`, {
@@ -161,7 +161,7 @@ export const voteIdea = async function (
   try {
      const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;
-  console.log("user token",token);
+  // console.log("user token",token);
   if (!token) return null;
     const res = await fetch(`${BASE_URL}/api/votes`, {
       method: "POST",
@@ -195,7 +195,7 @@ export const voteIdea = async function (
   try {
      const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;
-  console.log("user token",token);
+  // console.log("user token",token);
   if (!token) return null;
     const res = await fetch(
       `${BASE_URL}/api/idea/${ideaId}/status/`, // ⚠️ adjust if your route differs
@@ -247,7 +247,7 @@ export const updateIdea = async (
   try {
     const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;
-  console.log("user token",token);
+  // console.log("user token",token);
   if (!token) return null;
     if (!ideaId) {
       throw new Error("Idea ID is required")

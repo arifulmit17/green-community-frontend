@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { env } from "process"
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-console.log(BASE_URL);
+// console.log(BASE_URL);
 // 🔐 SIGNUP SERVICE
 export const signupUser = async (userData: {
   name: string;
@@ -23,7 +23,7 @@ export const signupUser = async (userData: {
     });
 
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     // ❌ Handle API error
     if (!res.ok) {
       return {
@@ -72,7 +72,7 @@ export const loginUser = async (userData: any) => {
     });
 
     const result = await res.json();
-    console.log("login result", result);
+    // console.log("login result", result);
     if (result.success) {
       const cookieStore =await cookies();
 
@@ -95,7 +95,7 @@ export const loginUser = async (userData: any) => {
 export const getUser = async () => {
   const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;
-  console.log("user token",token);
+  // console.log("user token",token);
   if (!token) return null;
 
   try {
@@ -108,7 +108,7 @@ export const getUser = async () => {
     });
 
     const result = await res.json();
-    console.log("User data",result);
+    // console.log("User data",result);
 
     if (!result.success) return null;
      

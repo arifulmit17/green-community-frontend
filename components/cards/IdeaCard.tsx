@@ -40,7 +40,7 @@ export default function IdeaCard({ idea}: { idea: Idea; }) {
 
   // 🔥 Calculate vote score
   const voteCount = idea.votes.reduce((acc, v) => {
-    return v.type === "UP" ? acc + 1 : acc - 1
+    return v.type === "UP" ? acc + 1 : acc + 1
   }, 0)
 
   return (

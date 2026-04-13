@@ -34,13 +34,13 @@ export default function MyIdeasPage() {
 useEffect(() => {
   const getUserData = async () => {
     const result = await getUser()
-    console.log("idea user",result);
+    // console.log("idea user",result);
     setUser(result)
   }
 
   getUserData()
 }, [])
-  console.log(user?.id);
+  // console.log(user?.id);
   
   
   useEffect(() => {
@@ -55,7 +55,7 @@ useEffect(() => {
 
     loadIdeas()
   }, [user])
-console.log(ideas);
+// console.log(ideas);
 
  
 

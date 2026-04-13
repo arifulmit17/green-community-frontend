@@ -66,7 +66,7 @@ const sortedIdeas = [...ideas].sort((a, b) => {
   }
   fetchIdeas()
 },[user])
-  console.log(user);
+  // console.log(user);
 
   const totalPages = Math.ceil(sortedIdeas.length / itemsPerPage)
 

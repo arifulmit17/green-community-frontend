@@ -16,7 +16,7 @@ type Session = {
 export default function PopularIdeas() {
   const [Ideas, setIdeas] = useState<Session[]>([])
   const [loading, setLoading] = useState(true)
-  console.log("Popular Ideas:", Ideas);
+  // console.log("Popular Ideas:", Ideas);
 
   useEffect(() => {
     const fetchIdeas = async () => {

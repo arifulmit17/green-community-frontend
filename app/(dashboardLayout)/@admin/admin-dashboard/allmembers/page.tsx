@@ -75,7 +75,7 @@ export default function MembersPage() {
     toast.error("Failed to update status")
   }
 }
-console.log("status update:",users);
+// console.log("status update:",users);
 
   return (
     <div className="w-11/12 mx-auto py-10 space-y-8">

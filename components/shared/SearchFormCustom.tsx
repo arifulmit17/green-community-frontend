@@ -28,7 +28,7 @@ export default function SearchFormCustom({
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`
         )
         const {data} = await res.json()
-        console.log(data);
+        // console.log(data);
         setCategories(data)
       } catch (error) {
         console.error("Category fetch error:", error)

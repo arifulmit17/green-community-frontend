@@ -18,7 +18,7 @@ export default function DeleteIdeaButton({ ideaId }: { ideaId: string  }) {
 
     try {
     const result=  await deleteIdea(ideaId)
-    console.log(result);
+    // console.log(result);
     if(result){
       toast.success("Idea deleted successfully")
       router.refresh()

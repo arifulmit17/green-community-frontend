@@ -11,15 +11,15 @@ import { getUser } from "./services/auth.service";
 export async function proxy(request: NextRequest) {
   
   const pathname = request.nextUrl.pathname;
-  console.log("hello proxy:",pathname);
+  // console.log("hello proxy:",pathname);
   let isAuthenticated = false
     let isAdmin = false
 
   
-console.log("from proxy");
+// console.log("from proxy");
   // Check for session token in cookies
   const data = await getUser()
-  console.log("proxy data:",data);
+  // console.log("proxy data:",data);
   
   //* User is not authenticated at all
   // if (!data) {

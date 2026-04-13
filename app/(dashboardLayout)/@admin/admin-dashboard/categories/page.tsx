@@ -43,7 +43,7 @@ export default function CreateCategoryPage() {
       // )
 
       const data =await createCategory(name)
-      console.log("category data",data);
+      // console.log("category data",data);
 
       if (!data) {
         toast.error( "Failed to create category")

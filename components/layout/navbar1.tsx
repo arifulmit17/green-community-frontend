@@ -104,13 +104,13 @@ const Navbar1 = ({
 }: Navbar1Props) => {
   const [session, setSession] = useState<any>(null);
 const [loading, setLoading] = useState(true);
-console.log(session);
+// console.log(session);
 const role = session?.role;
 
 useEffect(() => {
   const fetchSession = async () => {
     const data = await getUser();
-    console.log("Session data:", data);
+    // console.log("Session data:", data);
     setSession(data);
     setLoading(false);
   };

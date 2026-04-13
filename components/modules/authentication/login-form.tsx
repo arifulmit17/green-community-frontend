@@ -41,7 +41,7 @@ export function LoginForm({
     setError(null)
 
     const result = loginSchema.safeParse({ email, password })
-    console.log(result);
+    // console.log(result);
     if (!result.success) {
       result.error.issues.forEach((issue) => {
         toast.error(issue.message)
@@ -53,9 +53,9 @@ export function LoginForm({
 
     try {
       const res = await loginUser(result.data)
-      console.log("Login response:", res);
+      // console.log("Login response:", res);
       const data =res
-      console.log("Login data:",data);
+      // console.log("Login data:",data);
 
       if (!data.success) {
         setError(data.message)
@@ -68,7 +68,7 @@ export function LoginForm({
 
       window.location.href = "/"
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       toast.error("Something went wrong")
     } finally {
       setLoading(false)

@@ -17,7 +17,7 @@ export const getAllUsers = async () => {
         )
 
         const result = await res.json()
-        console.log("all user",result);
+        // console.log("all user",result);
         return result.data || []
     
 }
@@ -50,7 +50,7 @@ export const ChangeUserStatus = async (id: string, isActive: boolean) => {
       const token = cookieStore.get("token")?.value;
       
       if (!token) return null;
-      console.log("status",isActive);
+      // console.log("status",isActive);
        const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${id}/status`,
       {

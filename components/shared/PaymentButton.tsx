@@ -10,7 +10,7 @@ import { createPaymentIntent } from "@/services/payment.service"
 
 export default function PaymentButton({ ideaId, price }: { ideaId: string; price: number | undefined}) {
   const [clientSecret, setClientSecret] = useState<string | null>(null)
-  console.log(ideaId);
+  // console.log(ideaId);
   const handlePayment = async () => {
     const data=await createPaymentIntent(ideaId,price)
 
