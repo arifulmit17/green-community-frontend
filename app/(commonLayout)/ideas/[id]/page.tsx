@@ -45,12 +45,15 @@ export default function IdeaDetailsPage() {
         const data= await fetchIdeaById(id as string)
 
         
-        // console.log("idea data:",data);
+        console.log("idea data:",data);
         setLockedIdea(data)
         // 🔒 Paid idea protection
 
         const paymentIdea=await verifyPayment({ ideaId: id as string })
-        // console.log(paymentIdea);
+        console.log(paymentIdea);
+        if(paymentIdea){
+          setLocked(false)
+        }
         if (data?.message) {
           setLocked(true)
         } else {

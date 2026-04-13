@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { getUser } from "@/services/auth.service"
 
-type Session = {
+type idea = {
   id: string
   title: string
   description: string
@@ -14,8 +15,9 @@ type Session = {
 }
 
 export default function PopularIdeas() {
-  const [Ideas, setIdeas] = useState<Session[]>([])
+  const [Ideas, setIdeas] = useState<idea[]>([])
   const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null)
   // console.log("Popular Ideas:", Ideas);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function PopularIdeas() {
 
 const ideas = Array.isArray(result.data) ? result.data : []
 
-const sorted = ideas.sort((a: Session, b: Session) => {
+const sorted = ideas.sort((a: idea, b: idea) => {
   const scoreA = a.votes.reduce(
     (acc, v) => (v.type === "UP" ? acc + 1 : acc - 1),
     0
@@ -55,6 +57,14 @@ const sorted = ideas.sort((a: Session, b: Session) => {
     fetchIdeas()
   }, [])
 
+  useEffect(() => {
+    const fetchUser = async () => {
+       const user=await getUser()
+       setUser(user)
+    }
+    fetchUser()
+  },[])
+
   return (
     <div className="w-11/12 mx-auto py-10 space-y-6">
 
@@ -76,32 +86,32 @@ const sorted = ideas.sort((a: Session, b: Session) => {
 
       {/* Ideas Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {Ideas.map((session) => {
-          const voteCount = session.votes.reduce(
+        {Ideas.map((idea) => {
+          const voteCount = idea.votes.reduce(
             (acc, v) => (v.type === "UP" ? acc + 1 : acc - 1),
             0
           )
 
           return (
             <Card
-              key={session.id}
+              key={idea.id}
               className="rounded-2xl hover:shadow-lg transition"
             >
               <CardContent className="p-5 space-y-3">
 
                 {/* Category */}
                 <Badge className="bg-green-100 text-green-700">
-                  🌿 {session.category?.name}
+                  🌿 {idea.category?.name}
                 </Badge>
 
                 {/* Title */}
                 <h3 className="text-lg font-semibold line-clamp-2">
-                  {session.title}
+                  {idea.title}
                 </h3>
 
                 {/* Description */}
                 <p className="text-sm text-muted-foreground line-clamp-3">
-                  {session.description}
+                  {idea.description}
                 </p>
 
                 {/* Footer */}
@@ -113,12 +123,18 @@ const sorted = ideas.sort((a: Session, b: Session) => {
                   </span>
 
                   {/* Link */}
-                  <Link
-                    href={`/ideas/${session.id}`}
-                    className="text-sm text-green-600 hover:underline"
-                  >
-                    View →
-                  </Link>
+                  {user && <Link
+          href={`/ideas/${idea?.id}`}
+          className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+          View Idea →
+        </Link>}
+                   {!user && <Link
+          href={`/login`}
+          className="rounded-lg bg-yellow-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+          View Idea →
+        </Link>}
                 </div>
 
               </CardContent>
