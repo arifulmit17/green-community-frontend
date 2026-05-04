@@ -32,7 +32,7 @@ export default function IdeaPage() {
   const [ideas, setIdeas] = useState<Idea[]>([])
   const [user, setUser] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
-const [itemsPerPage] = useState(10)
+const [itemsPerPage] = useState(4)
   const [sortOrder, setSortOrder] = useState<"HIGH" | "LOW">("HIGH")
 
   
@@ -88,7 +88,7 @@ const paginatedIdeas = sortedIdeas.slice(
   <h2 className="text-xl font-semibold">Ideas</h2>
 
   <select
-    className="border px-3 py-1 rounded"
+    className="border bg-background px-3 py-1 rounded"
     value={sortOrder}
     onChange={(e) => {
       setSortOrder(e.target.value as "HIGH" | "LOW")

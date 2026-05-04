@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
+import { getCategories } from "@/services/category2.service"
 
 type Category = {
   id: string
@@ -24,10 +25,8 @@ export default function SearchFormCustom({
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`
-        )
-        const {data} = await res.json()
+        const data = await getCategories()
+        
         // console.log(data);
         setCategories(data)
       } catch (error) {
@@ -82,7 +81,7 @@ if (selectedCategory) params.append("categoryId", selectedCategory)
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="border rounded-md px-3 py-2 text-sm"
+            className="border bg-background rounded-md px-3 py-2 text-sm"
           >
             <option value="">All Categories</option>
             {categories.length > 0 && (

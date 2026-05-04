@@ -1,5 +1,6 @@
 "use client";
 
+import { getIdeas } from "@/services/idea2.service";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   BarChart,
@@ -40,14 +41,9 @@ export default function IdeaPage() {
   useEffect(() => {
     const fetchAllIdeas = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea/`,
-          {
-            credentials: "include",
-          }
-        );
+        const data = await getIdeas()
 
-        const { data } = await res.json();
+        
         setIdeas(data);
       } catch (error) {
         console.error("Error fetching ideas:", error);

@@ -14,7 +14,7 @@ type CategoryCardProps = {
 
 export function CategoryCard({ category }: CategoryCardProps) {
   return (
-    <Card className="w-full group rounded-2xl border bg-white p-4 shadow-sm transition hover:shadow-md hover:border-green-500">
+    <Card className="w-full group rounded-2xl border bg-card p-4 shadow-sm transition hover:shadow-md hover:border-green-500">
       
       <CardContent className="p-0 space-y-3">
         

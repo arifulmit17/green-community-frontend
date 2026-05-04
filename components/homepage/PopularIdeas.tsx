@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { getUser } from "@/services/auth.service"
+import { getIdeas } from "@/services/idea2.service"
 
 type idea = {
   id: string
@@ -23,17 +24,11 @@ export default function PopularIdeas() {
   useEffect(() => {
     const fetchIdeas = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea`,
-          {
-            credentials: "include",
-          }
-        )
+        const result = await getIdeas()
+         
 
-        const result = await res.json()
-
-const ideas = Array.isArray(result.data) ? result.data : []
-
+const ideas = Array.isArray(result) ? result : []
+console.log("popular ideas:",ideas);
 const sorted = ideas.sort((a: idea, b: idea) => {
   const scoreA = a.votes.reduce(
     (acc, v) => (v.type === "UP" ? acc + 1 : acc - 1),

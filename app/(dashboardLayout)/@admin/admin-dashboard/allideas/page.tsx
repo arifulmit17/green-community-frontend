@@ -2,6 +2,7 @@
 
 
 import IdeaCardAdmin from '@/components/cards/IdeaCardAdmin'
+import { getIdeas } from '@/services/idea2.service'
 import React, { useEffect, useState } from 'react'
 
 type Idea = {
@@ -32,13 +33,8 @@ export default function IdeaPage() {
       const fetchAllIdeas = async () => {
         try {
           
-              const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea/`,
-            {
-              credentials: "include", // 🔐 cookie auth
-            }
-          )
-          const {data} = await res.json()
+              const data = await getIdeas()
+          
           //  console.log(data);
           
           setIdeas(data)
