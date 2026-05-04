@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { getCategories } from "@/services/category2.service"
+import { get } from "http"
+import { getIdeasSearch } from "@/services/idea2.service"
 
 type Category = {
   id: string
@@ -47,11 +49,9 @@ export default function SearchFormCustom({
       if (search) params.append("search", search)
 if (selectedCategory) params.append("categoryId", selectedCategory)
 
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/idea?${params.toString()}`
-      )
+      const data = await getIdeasSearch(params.toString())
 
-      const {data} = await res.json()
+      
     //   console.log(data);
       onResults(data)
     } catch (error) {

@@ -60,6 +60,25 @@ export const getIdeas = async function () {
     return []
   }
   };
+  
+export const getIdeasSearch = async function (params: string) {
+  try{
+    const res= await fetch(`${BASE_URL}/api/idea?${params}`, {
+    method: "GET",
+    cache: "no-store",
+  })
+  const result = await res.json()
+
+  if (!res.ok || !result.success) {
+    throw new Error(result?.message || "Failed to fetch ideas")
+  }
+  return result.data || []
+
+  }catch(error){
+    console.error("Fetch ideas error:", error)
+    return []
+  }
+  };
 
 export const fetchIdeaById = async (ideaId: string) => {
      const cookieStore =await cookies();
