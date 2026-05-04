@@ -26,14 +26,12 @@ const steps = [
 
 export function HowItWorksSection() {
   return (
-    <section className="w-full px-4 py-16 bg-muted/40">
+    <section className="w-full px-4 bg-muted/40">
       <div className="max-w-6xl mx-auto text-center space-y-12">
         
         {/* Heading */}
         <div>
-          <h2 className="text-3xl md:text-4xl font-bold text-primary">
-            How It Works 🌱
-          </h2>
+          
           <p className="text-muted-foreground mt-2">
             Turn your ideas into real environmental impact in three simple steps
           </p>

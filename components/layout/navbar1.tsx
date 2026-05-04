@@ -161,10 +161,9 @@ if (role === "MEMBER") {
             <div className="flex items-center">
   {session && <ProfileDropdown session={session} auth={auth} />}
 </div>
-           {!session ? <Button asChild variant="outline" size="sm">
+           {!session && <Button asChild variant="outline" size="sm">
               <a href={auth.login.url}>{auth.login.title}</a>
-            </Button>:
-            <LogoutButton></LogoutButton>}
+            </Button>}
             <Button asChild size="sm">
               <a href={auth.signup.url}>{auth.signup.title}</a>
             </Button>

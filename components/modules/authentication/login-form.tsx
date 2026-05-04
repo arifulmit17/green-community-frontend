@@ -36,6 +36,21 @@ export function LoginForm({
     password: z.string().min(8, "Password must be at least 8 characters"),
   })
 
+  const handleDemoLogin = async () => {
+  setEmail("kamal@gmail.com")
+  setPassword("password1234")
+  
+  // optionally auto submit
+  await handleSubmit(new Event("submit") as any)
+}
+
+const handleAdminLogin = async () => {
+  setEmail("jamal@example.com")
+  setPassword("admin1234")
+  
+  await handleSubmit(new Event("submit") as any)
+}
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
@@ -117,6 +132,7 @@ export function LoginForm({
                 <Button type="submit" disabled={loading} className="w-full">
                   {loading ? "Logging in..." : "Login"}
                 </Button>
+                
 
                 <FieldDescription className="text-center">
                   Don&apos;t have an account?{" "}
@@ -125,6 +141,17 @@ export function LoginForm({
               </Field>
             </FieldGroup>
           </form>
+          <div className="flex flex-col gap-5 py-5">
+            <Button onClick={handleDemoLogin} type="submit" disabled={loading} className="w-full">
+                  {loading ? "Logging in..." : "Demo User Login"}
+                </Button>
+                <Button onClick={handleAdminLogin} type="submit" disabled={loading} className="w-full">
+                  {loading ? "Logging in..." : "Demo Admin Login"}
+                </Button>
+                <h1 className="text-gray-400">Demo Accounts: press login button again after form is filled</h1>
+
+          </div>
+          
         </CardContent>
       </Card>
     </div>

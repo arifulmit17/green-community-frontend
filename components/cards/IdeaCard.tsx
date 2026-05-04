@@ -44,7 +44,7 @@ export default function IdeaCard({ idea}: { idea: Idea; }) {
   }, 0)
 
   return (
-    <div className="group relative rounded-2xl border bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div className="group relative rounded-2xl border bg-card p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg">
 
       {/* 🌟 Paid Badge */}
       {idea?.isPaid && (
