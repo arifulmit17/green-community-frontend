@@ -26,6 +26,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getUser, logoutUser } from "@/services/auth.service";
 import LogoutButton from "../shared/LogoutButton";
+import { ModeToggle } from "../shared/ModeToggle";
+import ProfileDropdown from "../shared/DropdownButton";
 
 interface MenuItem {
   title: string;
@@ -92,6 +94,11 @@ const Navbar1 = ({
       url: "/blog",
      
     },
+    {
+      title: "Contact us",
+      url: "/contact",
+     
+    },
     
     
   ],
@@ -129,8 +136,8 @@ if (role === "MEMBER") {
   // const session= getUser()
   // console.log(session);
   return (
-    <section className={cn("py-4", className)}>
-      <div className="container mx-auto px-4">
+    <section className={cn("py-4 sticky top-0 z-50 bg-transparent/30 backdrop-blur-sm", className)}>
+      <div className="container mx-auto px-4 ">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
@@ -141,17 +148,18 @@ if (role === "MEMBER") {
                 {logo.title}
               </span>
             
-            <div className="flex items-center">
+            <div className="flex items-center gap-3">
               <NavigationMenu>
-                <NavigationMenuList>
+                <NavigationMenuList className="flex gap-3 ">
                   {finalMenu.map((item) => renderMenuItem(item))}
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
           </div>
           <div className="flex gap-2">
+            <ModeToggle></ModeToggle>
             <div className="flex items-center">
-  {session && <h1 className="text-sm"><Link href={auth.profile.url}>{auth.profile.title}</Link></h1>}
+  {session && <ProfileDropdown session={session} auth={auth} />}
 </div>
            {!session ? <Button asChild variant="outline" size="sm">
               <a href={auth.login.url}>{auth.login.title}</a>
@@ -189,12 +197,8 @@ if (role === "MEMBER") {
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
-                   {!session ? <Button asChild variant="outline" size="sm">
-              <a href={auth.login.url}>{auth.login.title}</a>
-            </Button>:
-            <Button asChild variant="outline" size="sm">
-              <div onClick={handleLogout}>Logout</div>
-            </Button>}
+                    <ModeToggle></ModeToggle>
+                   {session && <ProfileDropdown session={session} auth={auth} />}
             <Button asChild size="sm">
               <a href={auth.signup.url}>{auth.signup.title}</a>
             </Button>
@@ -217,7 +221,11 @@ const renderMenuItem = (item: MenuItem) => {
       <NavigationMenuLink
       asChild
         href={item.url}
-        className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
+        className="px-4 py-2 rounded-lg text-sm font-medium
+          text-
+          hover:bg-green-100 
+          hover:text-green-900
+          transition"
       >
         <Link href={item.url}>{item.title}</Link>
        

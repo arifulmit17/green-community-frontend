@@ -1,6 +1,8 @@
+import { CTASection } from "@/components/homepage/CalltoAction";
 import Categories from "@/components/homepage/Categories";
 import FaqSection from "@/components/homepage/FaqSection";
 import { Hero } from "@/components/homepage/Hero";
+import { HowItWorksSection } from "@/components/homepage/HowitWorks";
 import { NewsletterSection } from "@/components/homepage/Newsletter";
 import PopularIdeas from "@/components/homepage/PopularIdeas";
 
@@ -12,28 +14,42 @@ export default function Home() {
       <section className="h-1000px w-full ">
           <Hero></Hero>
       </section>
-      <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-40">
+      <section className="section">
             <div className="w-full text-5xl text-center"> 
                <h1 >Popular Ideas</h1>
             </div>
             
            <PopularIdeas></PopularIdeas>
       </section>
-      <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-10">
+      <section className="section">
             <div className="w-full text-5xl text-center"> 
                <h1 >Popular Categories</h1>
             </div>
             
            <Categories></Categories>
       </section>
-      <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-10">
+      <section className="section">
+            <div className="w-full text-5xl text-center"> 
+               <h1 >How It Works</h1>
+            </div>
+            
+           <HowItWorksSection></HowItWorksSection>
+      </section>
+      <section className="section">
+            <div className="w-full text-5xl text-center"> 
+               <h1 >Call to Action</h1>
+            </div>
+            
+           <CTASection></CTASection>
+      </section>
+      <section className="section">
             <div className="w-full text-5xl text-center"> 
                <h1 >F.A.Q</h1>
             </div>
             
           <FaqSection></FaqSection>
       </section>
-      <section className="w-full flex flex-col justify-center items-center gap-10 mt-5 lg:mt-10">
+      <section className="section">
             <div className="w-full text-5xl text-center"> 
                <h1 >Newsletter</h1>
             </div>
