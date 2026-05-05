@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getUser } from "@/services/auth.service";
 
 import EditIdeaModal from "../shared/EditIdeaModal";
+import Image from "next/image";
 
 
 type Idea = {
@@ -14,6 +15,7 @@ type Idea = {
   description: string
   isPaid: boolean
   price?: number
+  image?: string
   status: "UNDER_REVIEW" | "APPROVED" | "REJECTED"
   author: {
     id: string
@@ -57,9 +59,21 @@ export default function IdeaCard({ idea}: { idea: Idea; }) {
       <div className="flex items-center gap-4">
 
         {/* Avatar (Author initial) */}
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-sm font-bold text-green-700">
-          {idea?.author?.name?.charAt(0) || "U"}
-        </div>
+       <div className="h-20 w-20 rounded-full overflow-hidden bg-card flex items-center justify-center">
+  {idea?.image ? (
+    <Image
+      src={idea?.image}
+      alt={idea?.title}
+      width={48}
+      height={48}
+      className="object-cover w-full h-full"
+    />
+  ) : (
+    <span className="text-sm font-bold text-green-700">
+      {idea?.author?.name?.charAt(0) || "U"}
+    </span>
+  )}
+</div>
 
         <div className="flex-1">
           <h3 className="text-lg font-semibold leading-tight capitalize">

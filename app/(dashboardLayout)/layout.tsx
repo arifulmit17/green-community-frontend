@@ -23,6 +23,12 @@ import { getUser } from "@/services/auth.service";
 
 import { Children } from "react";
 
+const auth = {
+    profile: { title: "Profile", url: "/profile" },
+    login: { title: "Login", url: "/login" },
+    signup: { title: "Sign up", url: "/signup" },
+  }
+
 export default async function DashboardLayout({
     member,
   admin
@@ -62,8 +68,7 @@ export default async function DashboardLayout({
           </Breadcrumb>
           <div className="w-full flex justify-end gap-5">
             <ModeToggle></ModeToggle>
-            
-            <LogoutButton></LogoutButton>
+            <ProfileDropdown session={data} auth={auth}></ProfileDropdown>
           </div>
           
         </header>

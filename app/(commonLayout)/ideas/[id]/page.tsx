@@ -8,6 +8,7 @@ import PaymentButton from "@/components/shared/PaymentButton"
 import DeleteIdeaButton from "@/components/shared/DeleteIdea"
 import { fetchIdeaById } from "@/services/idea2.service"
 import { verifyPayment } from "@/services/payment.service"
+import Image from "next/image"
 
 type Idea = {
   id: string
@@ -106,13 +107,15 @@ export default function IdeaDetailsPage() {
       </div>
 
       {/* 🖼 Image */}
-      {/* {idea.image && (
-        <img
-          src={idea.image}
-          alt={idea.title}
+      {idea?.image && (
+        <Image
+          src={idea?.image}
+          alt={idea?.title}
           className="w-full h-[350px] object-cover rounded-xl mb-6"
+          width={400}
+          height={350}
         />
-      )} */}
+      )}
 
       {/* 📊 Stats */}
       <div className="flex items-center gap-6 mb-8">
@@ -175,9 +178,11 @@ export default function IdeaDetailsPage() {
         )}
       </section>
       {/* {Delete idea} */}
-      <div>
-        <DeleteIdeaButton ideaId={id as string}></DeleteIdeaButton>
-      </div>
+     {idea.status !== "APPROVED" && (
+        <div>
+          <DeleteIdeaButton ideaId={id as string}></DeleteIdeaButton>
+        </div>
+      )}
 
       {/* 🔙 Back */}
       <div className="mt-10">

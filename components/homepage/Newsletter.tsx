@@ -38,7 +38,7 @@ const emailSchema = z
   }
 }
   return (
-    <section className="w-full py-20 bg-background">
+    <section className="w-full bg-background">
       <div className="max-w-4xl mx-auto px-6 text-center">
 
         {/* 🌿 Heading */}

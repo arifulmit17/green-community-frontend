@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
+import { User } from "lucide-react";
 
 export default function ProfileDropdown({ session, auth }) {
   if (!session) return null;
@@ -20,7 +21,7 @@ export default function ProfileDropdown({ session, auth }) {
         {/* Trigger */}
         <DropdownMenuTrigger asChild>
           <button className="text-sm font-medium hover:underline">
-            {auth.profile.title}
+           <User></User>
           </button>
         </DropdownMenuTrigger>
 
