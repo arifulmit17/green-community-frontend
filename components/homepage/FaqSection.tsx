@@ -7,7 +7,7 @@ import {
 
 export default function FaqSection() {
   return (
-   <section className="w-full py-20 bg-muted/40">
+   <section className="w-full bg-muted/40">
   <div className="container max-w-4xl mx-auto px-6">
     
     {/* Heading */}

@@ -41,7 +41,7 @@ export default function CheckoutForm({ clientSecret }: { clientSecret: string })
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <CardElement options={{ hidePostalCode: true }} className="p-3 border rounded-md" />
+      <CardElement options={{ hidePostalCode: true }} className="p-3 bg-white border rounded-md" />
 
       <Button disabled={loading}>
         {loading ? "Processing..." : "Confirm Payment"}

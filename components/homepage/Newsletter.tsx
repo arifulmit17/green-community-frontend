@@ -38,7 +38,7 @@ const emailSchema = z
   }
 }
   return (
-    <section className="w-full bg-background">
+    <section className="w-11/12 bg-card p-4 rounded-2xl">
       <div className="max-w-4xl mx-auto px-6 text-center">
 
         {/* 🌿 Heading */}

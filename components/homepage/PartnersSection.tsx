@@ -11,7 +11,7 @@ const partners = [
   },
   {
     name: "Solar Future Lab",
-    logo: "/partners/solar-future.png",
+    logo: "/solar.png",
   },
   {
     name: "EcoRecycle Bangladesh",
@@ -35,7 +35,7 @@ const fadeUp = {
 
 export function PartnersSection() {
   return (
-    <section className="w-full px-4 bg-muted/40">
+    <section className="w-full px-4 bg-background">
       <div className="max-w-6xl mx-auto text-center space-y-12">
 
         {/* Heading */}
@@ -63,7 +63,7 @@ export function PartnersSection() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="rounded-2xl border shadow-sm hover:shadow-md transition">
+              <Card className="rounded-2xl h-50 border shadow-sm hover:shadow-md transition">
                 <CardContent className="p-6 flex items-center justify-center">
 
                   <Image

@@ -90,9 +90,9 @@ export default function MembersPage() {
 
       {/* Table */}
       {!loading && (
-        <div className="overflow-x-auto border rounded-2xl">
+        <div className="overflow-x-auto bg-background border rounded-2xl">
           <table className="w-full text-sm">
-            <thead className="bg-green-50">
+            <thead className="bg-background">
               <tr>
                 <th className="p-3 text-left">Name</th>
                 <th className="p-3 text-left">Email</th>

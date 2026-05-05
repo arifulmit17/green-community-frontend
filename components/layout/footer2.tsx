@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
-
-
+import { Mail, Phone, MapPin } from "lucide-react";
 
 interface MenuItem {
   title: string;
@@ -11,30 +10,18 @@ interface MenuItem {
 }
 
 interface Footer2Props {
-  logo?: {
-    url: string;
-    src: string;
-    alt: string;
-    title: string;
-  };
   className?: string;
   tagline?: string;
   menuItems?: MenuItem[];
   copyright?: string;
-  bottomLinks?: {
-    text: string;
-    url: string;
-  }[];
 }
 
 const Footer2 = ({
-  
   className,
-  tagline = "Components made easy.",
+  tagline = "Building a greener future together 🌱",
   menuItems = [
-    
     {
-      title: "Resourses",
+      title: "Resources",
       links: [
         { text: "Ideas", url: "/ideas" },
         { text: "About Us", url: "/about" },
@@ -52,28 +39,34 @@ const Footer2 = ({
       ],
     },
   ],
-  copyright = "© 2026 Green Community All rights reserved.",
+  copyright = "© 2026 Green Community. All rights reserved.",
 }: Footer2Props) => {
   return (
-    <section className={cn("py-32", className)}>
+    <section className={cn("py-20", className)}>
       <div className="container mx-auto">
-        <footer >
-          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
-            <div className="col-span-2 mb-8 lg:mb-0">
-              <div className="flex flex-col items-start gap-2 lg:justify-start">
-                <h1> 🌿 Green Community</h1>
-                 <p>{copyright}</p>
-              </div>
-              
+        <footer>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            
+            {/* Logo + Tagline */}
+            <div className="space-y-3">
+              <h1 className="text-lg font-bold">🌿 Green Community</h1>
+              <p className="text-sm text-muted-foreground">
+                {tagline}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {copyright}
+              </p>
             </div>
+
+            {/* Menu Sections */}
             {menuItems.map((section, sectionIdx) => (
               <div key={sectionIdx}>
-                <h3 className="mb-4 font-bold">{section.title}</h3>
-                <ul className="space-y-4 text-muted-foreground">
+                <h3 className="mb-4 font-semibold">{section.title}</h3>
+                <ul className="space-y-3 text-sm text-muted-foreground">
                   {section.links.map((link, linkIdx) => (
                     <li
                       key={linkIdx}
-                      className="font-medium hover:text-primary"
+                      className="hover:text-primary transition"
                     >
                       <a href={link.url}>{link.text}</a>
                     </li>
@@ -81,8 +74,31 @@ const Footer2 = ({
                 </ul>
               </div>
             ))}
+
+            {/* 🌿 Contact Info */}
+            <div>
+              <h3 className="mb-4 font-semibold">Contact</h3>
+              <ul className="space-y-4 text-sm text-muted-foreground">
+
+                <li className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-primary" />
+                  support@greencommunity.org
+                </li>
+
+                <li className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-primary" />
+                  +880 1234-567890
+                </li>
+
+                <li className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-primary" />
+                  Dhaka, Bangladesh
+                </li>
+
+              </ul>
+            </div>
+
           </div>
-          
         </footer>
       </div>
     </section>

@@ -2,6 +2,7 @@ import Link from "next/link"
 import IdeaStatusActions from "../shared/ChangeIdeaStatus"
 import { useEffect, useState } from "react"
 import { getUser } from "@/services/auth.service"
+import Image from "next/image"
 
 type Idea = {
   id: string
@@ -9,6 +10,7 @@ type Idea = {
   description: string
   isPaid: boolean
   price?: number
+  image?: string
   status: "UNDER_REVIEW" | "APPROVED" | "REJECTED"
   author: {
     name: string
@@ -32,7 +34,7 @@ export default function IdeaCard({ idea}: { idea: Idea;  }) {
   }, 0)
 
   return (
-    <div className="group relative rounded-2xl border bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div className="group lg:h-100 h-120 relative rounded-2xl border bg-card p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg">
 
       {/* 🌟 Paid Badge */}
       {idea?.isPaid && (
@@ -45,14 +47,30 @@ export default function IdeaCard({ idea}: { idea: Idea;  }) {
       <div className="flex items-center gap-4">
 
         {/* Avatar (Author initial) */}
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-sm font-bold text-green-700">
-          {idea?.author?.name?.charAt(0) || "U"}
-        </div>
+              <div className="h-20 w-20 rounded-full overflow-hidden bg-card flex items-center justify-center">
+         {idea?.image ? (
+           <Image
+             src={idea?.image}
+             alt={idea?.title}
+             width={48}
+             height={48}
+             className="object-cover w-full h-full"
+           />
+         ) : (
+           <span className="text-sm font-bold text-green-700">
+             {idea?.author?.name?.charAt(0) || "U"}
+           </span>
+         )}
+       </div>
 
         <div className="flex-1">
-          <h3 className="text-lg font-semibold leading-tight capitalize">
+          <div className="w-11/12 h-10">
+             <h3 className="text-lg font-semibold leading-tight capitalize">
             {idea?.title}
           </h3>
+
+          </div>
+         
           <p className="text-sm text-muted-foreground">
             by {idea?.author?.name} · 🌿 {idea?.category?.name}
           </p>
@@ -63,9 +81,13 @@ export default function IdeaCard({ idea}: { idea: Idea;  }) {
       <div className="my-4 h-px bg-muted" />
 
       {/* 🌱 Description */}
-      <p className="text-sm text-muted-foreground line-clamp-3">
+      <div className="w-11/12 h-1/5">
+        <p className="text-sm text-muted-foreground line-clamp-3">
         {idea?.description}
       </p>
+
+      </div>
+      
 
       {/* Divider */}
       <div className="my-4 h-px bg-muted" />
@@ -95,17 +117,19 @@ export default function IdeaCard({ idea}: { idea: Idea;  }) {
         >
           {idea?.status.replace("_", " ")}
         </span>
-      </div>
-
-      {/* Footer */}
-      <div className="mt-5 flex items-center justify-between">
-        
         {/* Price */}
         <span className="text-sm text-muted-foreground">
           {idea?.isPaid ? `৳${idea?.price}` : "Free"}
         </span>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-5 flex gap-5 items-center justify-between">
+        
+        
 
     {/* Status update */}
+         
          <IdeaStatusActions ideaId={idea.id} currentStatus={idea.status} />
          
 

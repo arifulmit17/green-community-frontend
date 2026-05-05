@@ -38,16 +38,16 @@ export function Hero() {
   ];
 
   return (
-    <div className="w-full h-[70vh]">
-      <Carousel className="relative w-full h-1/2">
+    <div className="w-full h-[70vh] bg-background">
+      <Carousel className="relative bg-background w-full h-1/2">
         
         <CarouselContent className="h-1/2">
           {slides?.map((slide, index) => (
             <CarouselItem
               key={index}
-              className="h-1/2 flex items-stretch"
+              className="h-1/2 flex bg-background items-stretch"
             >
-              <Card className="h-1/2 w-full">
+              <Card className="h-1/2 bg-background w-full">
                 <CardContent className="relative h-100 p-0">
                   
                   {/* Image */}

@@ -4,6 +4,7 @@ import FaqSection from "@/components/homepage/FaqSection";
 import { Hero } from "@/components/homepage/Hero";
 import { HowItWorksSection } from "@/components/homepage/HowitWorks";
 import { NewsletterSection } from "@/components/homepage/Newsletter";
+import { OfferSection } from "@/components/homepage/Offers";
 import { PartnersSection } from "@/components/homepage/PartnersSection";
 import PopularIdeas from "@/components/homepage/PopularIdeas";
 import { StatsSection } from "@/components/homepage/Statistics";
@@ -58,6 +59,13 @@ export default function Home() {
             </div>
             
            <FeedbackSection></FeedbackSection>
+      </section>
+      <section className="section">
+            <div className="w-full text-5xl text-center"> 
+               <h1 >Offers</h1>
+            </div>
+            
+           <OfferSection></OfferSection>
       </section>
       <section className="section">
             <div className="w-full text-5xl text-center"> 

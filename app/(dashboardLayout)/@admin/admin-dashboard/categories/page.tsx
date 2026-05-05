@@ -30,17 +30,6 @@ export default function CreateCategoryPage() {
     setLoading(true)
 
     try {
-      // const res = await fetch(
-      //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`,
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     credentials: "include",
-      //     body: JSON.stringify({ name }),
-      //   }
-      // )
 
       const data =await createCategory(name)
       // console.log("category data",data);
@@ -108,15 +97,15 @@ export default function CreateCategoryPage() {
   }
 
   return (
-    <div className="max-w-md flex gap-10 py-10">
+    <div className=" flex flex-col gap-10 py-10">
       
-        <div>
+        <div className="flex flex-col gap-10">
             <h1 className="text-xl font-bold text-center">
             🌱 Create Category
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
+            <div className="flex flex-col gap-5">
               <Label>Category Name</Label>
               <Input
                 value={name}
@@ -139,7 +128,7 @@ export default function CreateCategoryPage() {
         </div>
         
       
-    <div className="lg:flex flex-col gap-5">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
       {
         categories.map((category) => (
           <CategoryCard key={category.id} category={category}>

@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 
 export function CTASection() {
   return (
-    <section className="w-full px-4 bg-background">
-      <div className="max-w-5xl mx-auto text-center space-y-6">
+    <section className="w-10/12 p-4 bg-card rounded-2xl mx-auto">
+      <div className="max-w-6xl mx-auto text-center space-y-6">
         
         {/* Heading */}
         <h2 className="text-3xl md:text-4xl font-bold text-green-800">
@@ -30,14 +30,14 @@ export function CTASection() {
           </Button>
 
           {/* Secondary CTA */}
-          <Button
+          {/* <Button
             asChild
             variant="outline"
             size="lg"
             className="border-green-600 text-green-700 hover:bg-green-100 rounded-xl"
           >
-            <Link href="/submit-idea">Submit Your Idea</Link>
-          </Button>
+            <Link href="/login">Submit Your Idea</Link>
+          </Button> */}
         </div>
 
       </div>

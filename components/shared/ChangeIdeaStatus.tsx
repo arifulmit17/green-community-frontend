@@ -41,7 +41,7 @@ export default function IdeaStatusActions({
   }
 
   return (
-    <div className="flex gap-2 flex-wrap">
+    <div className="flex flex-col lg:flex-row gap-2 flex-wrap">
       <Button
         variant={currentStatus === "UNDER_REVIEW" ? "default" : "outline"}
         onClick={() => handleStatusChange("UNDER_REVIEW")}
