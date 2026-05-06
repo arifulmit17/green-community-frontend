@@ -62,7 +62,7 @@ It combines social interaction with sustainability, encouraging users to contrib
 ### Deployment
 
 * Vercel (Frontend)
-* Render (Backend)
+* Vercel (Backend)
 
 ---
 
@@ -101,16 +101,6 @@ It combines social interaction with sustainability, encouraging users to contrib
 
 ---
 
-## 🖼️ Screenshots / GIFs
-
-> Add screenshots or GIFs here to showcase:
-
-* Homepage
-* Idea submission flow
-* Voting system
-* Payment checkout
-
----
 
 ## ⚙️ Setup Instructions
 
