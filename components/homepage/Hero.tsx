@@ -1,92 +1,68 @@
-import * as React from "react"
-import Image from "next/image"
-import Link from "next/link"
-
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-
-import { Button } from "@/components/ui/button"
-
-
-import tutorimg1 from "../../public/Garden-hero.jpg"
-import tutorimg2 from "../../public/family.jpg"
-import tutorimg3 from "../../public/garden.jpg"
-import { Card, CardContent } from "../ui/card"
-
+import Image from "next/image";
+import tutorimg1 from "../../public/Garden-hero.jpg"; // Adjust the path as necessary
 export function Hero() {
-  const slides = [
-    {
-      image: tutorimg1,
-      title: "Grow Ideas for a Greener Future",
-      subtitle: "Share and discover sustainable solutions that make a real impact",
-    },
-    {
-      image: tutorimg2,
-      title: "Community Driven Change",
-      subtitle: "Collaborate with people who care about the environment",
-    },
-    {
-      image: tutorimg3,
-      title: "Act Local, Think Global",
-      subtitle: "Turn small eco-friendly ideas into meaningful global change",
-    },
-  ];
+  const hero = {
+    image: tutorimg1,
+    title: "Grow Ideas for a Greener Future",
+    subtitle:
+      "Share and discover sustainable solutions that make a real impact",
+  };
 
   return (
-    <div className="w-full h-[70vh] bg-background">
-      <Carousel className="relative bg-background w-full h-1/2">
-        
-        <CarouselContent className="h-1/2">
-          {slides?.map((slide, index) => (
-            <CarouselItem
-              key={index}
-              className="h-1/2 flex bg-background items-stretch"
-            >
-              <Card className="h-1/2 bg-background w-full">
-                <CardContent className="relative h-100 p-0">
-                  
-                  {/* Image */}
-                  <Image
-                    src={slide?.image}
-                    alt={slide?.title}
-                    fill
-                    className="object-cover"
-                    priority={index === 0}
-                  />
+    <section className="relative h-[90vh] w-full overflow-hidden">
+      {/* Background Image */}
+      <Image
+        src={hero.image}
+        alt={hero.title}
+        fill
+        priority
+        className="object-cover"
+      />
 
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black/40" />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/55" />
 
-                  {/* Text */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-                    <h1 className="text-3xl md:text-5xl font-bold text-white mb-3">
-                      {slide?.title}
-                    </h1>
-                    <p className="text-white/90 text-lg mb-6 max-w-xl">
-                      {slide?.subtitle}
-                    </p>
+      {/* Content */}
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6">
+        <div className="max-w-2xl text-white">
+          <h1 className="mb-6 text-5xl font-bold leading-tight md:text-6xl lg:text-7xl">
+            {hero.title}
+          </h1>
 
-                    <Link href="/ideas">
-                      <Button size="lg" className="bg-green-500 hover:bg-green-600">
-                        🌱 Explore Ideas
-                      </Button>
-                    </Link>
-                  </div>
+          <p className="mb-8 text-lg leading-relaxed text-gray-200 md:text-xl">
+            {hero.subtitle}
+          </p>
 
-                </CardContent>
-              </Card>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-
-        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10" />
-        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10" />
-      </Carousel>
-    </div>
+          <button
+  className="
+    group
+    rounded-xl
+    bg-gradient-to-r
+    from-green-500
+    to-emerald-600
+    px-8
+    py-4
+    text-lg
+    font-semibold
+    text-white
+    shadow-lg
+    transition-all
+    duration-300
+    hover:-translate-y-1
+    hover:scale-105
+    hover:shadow-[0_15px_35px_rgba(34,197,94,0.35)]
+    active:scale-95
+  "
+>
+  <span className="flex items-center gap-2">
+    Explore Ideas
+    <span className="transition-transform duration-300 group-hover:translate-x-1">
+      →
+    </span>
+  </span>
+</button>
+        </div>
+      </div>
+    </section>
   );
 }
