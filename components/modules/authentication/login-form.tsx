@@ -142,10 +142,10 @@ const handleAdminLogin = async () => {
             </FieldGroup>
           </form>
           <div className="flex flex-col gap-5 py-5">
-            <Button onClick={handleDemoLogin} type="submit" disabled={loading} className="w-full">
+            <Button onClick={handleDemoLogin} type="submit" variant="outline" disabled={loading} className="w-full">
                   {loading ? "Logging in..." : "Demo User Login"}
                 </Button>
-                <Button onClick={handleAdminLogin} type="submit" disabled={loading} className="w-full">
+                <Button onClick={handleAdminLogin} type="submit" variant="outline" disabled={loading} className="w-full">
                   {loading ? "Logging in..." : "Demo Admin Login"}
                 </Button>
                 <h1 className="text-gray-400">Demo Accounts: press login button again after form is filled</h1>
