@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { getCategories } from "@/services/category2.service"
-import { get } from "http"
 import { getIdeasSearch } from "@/services/idea2.service"
 
 type Category = {
@@ -15,12 +14,14 @@ type Category = {
 
 export default function SearchFormCustom({
   onResults,
+  initialCategoryId = "",
 }: {
   onResults: (data: any[]) => void
+  initialCategoryId?: string
 }) {
   const [search, setSearch] = useState("")
   const [categories, setCategories] = useState<Category[]>([])
-  const [selectedCategory, setSelectedCategory] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState(initialCategoryId)
   const [loading, setLoading] = useState(false)
 
   // 🌿 Fetch categories

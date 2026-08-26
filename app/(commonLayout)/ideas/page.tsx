@@ -4,6 +4,7 @@ import IdeaCard from '@/components/cards/IdeaCard'
 import SearchFormCustom from '@/components/shared/SearchFormCustom'
 import { getUser } from '@/services/auth.service'
 import { getIdeas } from '@/services/idea2.service'
+import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 type Idea = {
@@ -29,6 +30,8 @@ type Idea = {
 
 export default function IdeaPage() {
 
+  const searchParams = useSearchParams()
+  const categoryId = searchParams.get("categoryId") || ""
   const [ideas, setIdeas] = useState<Idea[]>([])
   const [user, setUser] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
@@ -56,7 +59,8 @@ const sortedIdeas = [...ideas].sort((a, b) => {
   useEffect(() => {
     const fetchIdeas = async () => {
       try {
-        const res = await getIdeas()
+        const params = categoryId ? `categoryId=${encodeURIComponent(categoryId)}` : ""
+        const res = params ? await getIdeasSearch(params) : await getIdeas()
        
         setIdeas(res)
       } catch (error) {
@@ -65,7 +69,7 @@ const sortedIdeas = [...ideas].sort((a, b) => {
       
   }
   fetchIdeas()
-},[user])
+},[user, categoryId])
   // console.log(user);
 
   const totalPages = Math.ceil(sortedIdeas.length / itemsPerPage)
@@ -79,7 +83,7 @@ const paginatedIdeas = sortedIdeas.slice(
     <div className='flex flex-col gap-10'>
 
       {/* 🔍 Search + Category */}
-      <SearchFormCustom  onResults={(data) => {
+      <SearchFormCustom initialCategoryId={categoryId} onResults={(data) => {
     setIdeas(data)
     setCurrentPage(1) // reset page
   }} />

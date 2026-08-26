@@ -46,3 +46,49 @@ export const createCategory = async (name: string) => {
 
 
 }
+
+export const updateCategory = async (id: string, name: string) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  if (!token) return null;
+
+  try {
+    const res = await fetch(`${BASE_URL}/api/categories/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `token=${token}`,
+      },
+      body: JSON.stringify({ name }),
+    });
+    const data = await res.json();
+
+    return {
+      success: res.ok && data?.success !== false,
+      message: data?.message,
+    };
+  } catch (error) {
+    console.error("Update category error:", error);
+    return { success: false, message: "Failed to update category" };
+  }
+};
+
+export const deleteCategory = async (id: string) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  if (!token) return null;
+
+  try {
+    const res = await fetch(`${BASE_URL}/api/categories/${id}`, {
+      method: "DELETE",
+      headers: {
+        Cookie: `token=${token}`,
+      },
+    });
+
+    return { success: res.ok };
+  } catch (error) {
+    console.error("Delete category error:", error);
+    return { success: false };
+  }
+};

@@ -164,7 +164,9 @@ if (role === "MEMBER") {
            {!session && <Button asChild variant="outline" size="sm">
               <a href={auth.login.url}>{auth.login.title}</a>
             </Button>}
-            <Button asChild size="sm">
+            <Button className="bg-linear-to-r
+    from-green-500
+    to-emerald-600" asChild size="sm">
               <a href={auth.signup.url}>{auth.signup.title}</a>
             </Button>
           </div>
