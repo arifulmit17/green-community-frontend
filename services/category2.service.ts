@@ -20,7 +20,15 @@ export const getCategories = async () => {
   }
 }
 
-export const createCategory = async (name: string) => {
+export const createCategory = async (category: {
+  name: string
+  description?: string
+  icon?: string
+  color?: string
+  isActive?: boolean
+  isFeatured?: boolean
+  sortOrder?: number
+}) => {
   const cookieStore =await cookies();
   const token = cookieStore.get("token")?.value;
   if (!token) return null;
@@ -33,7 +41,7 @@ export const createCategory = async (name: string) => {
             "Content-Type": "application/json",
             Cookie: `token=${token}`,
           },
-          body: JSON.stringify({ name }),
+          body: JSON.stringify(category),
         }
       )
          const data = await res.json() 
